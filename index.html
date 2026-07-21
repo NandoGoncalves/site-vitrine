@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnostic de dette technique — Audit Dataiku &amp; no-code</title>
-<meta name="description" content="25 ans de recul sur les cycles du génie logiciel. Audit Dataiku et no-code : je nomme la dette technique que votre organisation refuse de nommer, et j'y mets un chiffre.">
+<title>Fernando Gonçalves — Consultant en dette technique</title>
+<meta name="description" content="25 ans à l'intérieur des DSI. J'établis en 15 jours une image claire et chiffrée de votre dette technique — Dataiku, code métier, applications backend, chaînes d'ordonnanceurs — pour que vous puissiez décider.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
     --crimson:#96002a;
     --ember:#c8213f;
     --ink:#0c0118;
+    --ink2:#10021f;
     --paper:#f4eee7;
     --paper-dim:#c9b9c8;
     --line: rgba(244,238,231,0.14);
@@ -37,10 +38,7 @@
     line-height:1.08;
     letter-spacing:-0.01em;
   }
-  .mono{
-    font-family:'IBM Plex Mono', monospace;
-    letter-spacing:0.02em;
-  }
+  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em;}
   a{color:inherit;}
   img{max-width:100%; display:block;}
   .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
@@ -50,340 +48,207 @@
   /* ---------- NAV ---------- */
   header.nav{
     position:fixed; top:0; left:0; right:0; z-index:100;
-    background:rgba(12,1,24,0.82);
+    background:rgba(12,1,24,0.85);
     backdrop-filter: blur(10px);
     border-bottom:1px solid var(--line);
   }
-  .nav .wrap{
-    display:flex; align-items:center; justify-content:space-between;
-    padding-top:18px; padding-bottom:18px;
-  }
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
   .nav-mark{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:0.04em;
-    display:flex; align-items:center; gap:10px;
-    text-decoration:none;
+    font-family:'IBM Plex Mono', monospace; font-size:14px; font-weight:600; letter-spacing:0.04em;
+    display:flex; align-items:center; gap:10px; text-decoration:none;
   }
-  .nav-mark .dot{
-    width:9px; height:9px; border-radius:2px;
-    background: linear-gradient(135deg, var(--ember), var(--indigo));
-    display:inline-block;
-  }
-  .nav-links{display:flex; gap:32px; font-size:14px;}
-  .nav-links a{
-    text-decoration:none; color:var(--paper-dim);
-    transition:color .15s ease;
-  }
+  .nav-mark .dot{width:9px; height:9px; border-radius:2px; background:linear-gradient(135deg, var(--ember), var(--indigo)); display:inline-block;}
+  .nav-links{display:flex; gap:30px; font-size:14px;}
+  .nav-links a{text-decoration:none; color:var(--paper-dim); transition:color .15s ease;}
   .nav-links a:hover{color:var(--paper);}
   .nav-cta{
     font-size:13px; font-family:'IBM Plex Mono',monospace;
     border:1px solid var(--line); padding:8px 16px; border-radius:2px;
     text-decoration:none; white-space:nowrap;
-    transition: border-color .15s ease, background .15s ease;
+    transition:border-color .15s ease, background .15s ease;
   }
   .nav-cta:hover{border-color:var(--ember); background:rgba(200,33,63,0.12);}
-  @media (max-width:760px){ .nav-links{display:none;} }
+  @media (max-width:800px){ .nav-links{display:none;} }
 
-  /* ---------- HERO ---------- */
+  /* ---------- HERO (fond CSS pur, pas d'image externe) ---------- */
   .hero{
-    position:relative;
-    padding-top:196px;
-    padding-bottom:110px;
-    overflow:hidden;
-    border-bottom:1px solid var(--line);
+    position:relative; padding-top:196px; padding-bottom:100px;
+    overflow:hidden; border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(115deg, var(--indigo) 0%, var(--violet) 32%, var(--magenta) 60%, var(--crimson) 100%);
   }
   .hero::before{
+    /* grille façon "matrice de dataframe" : le motif d'origine du logo */
     content:"";
     position:absolute; inset:0;
-    background-image:url('assets/banniere-web.jpg');
-    background-size:cover; background-position:center;
-    opacity:0.24;
-    mask-image: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 55%, transparent 100%);
-    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 55%, transparent 100%);
+    background-image:
+      repeating-linear-gradient(90deg, rgba(244,238,231,0.05) 0 1px, transparent 1px 130px),
+      repeating-linear-gradient(0deg, rgba(244,238,231,0.05) 0 1px, transparent 1px 130px);
+    opacity:0.6;
   }
   .hero::after{
     content:"";
     position:absolute; inset:0;
-    background: radial-gradient(ellipse 900px 500px at 15% 0%, rgba(122,0,50,0.35), transparent 60%);
+    background: radial-gradient(ellipse 900px 560px at 8% -10%, rgba(12,1,24,0.55), transparent 60%),
+                linear-gradient(180deg, transparent 40%, var(--ink) 100%);
   }
   .hero-inner{position:relative; z-index:2;}
   .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--paper-dim);
-    display:flex; align-items:center; gap:10px;
-    margin-bottom:28px;
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--paper-dim); display:flex; align-items:center; gap:10px; margin-bottom:26px;
   }
-  .eyebrow::before{
-    content:""; width:22px; height:1px; background:var(--ember);
-    display:inline-block;
-  }
-  .hero h1{
-    font-size:clamp(32px, 5vw, 54px);
-    max-width:920px;
-    color:var(--paper);
-  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--ember); display:inline-block;}
+  .hero h1{font-size:clamp(30px, 4.6vw, 52px); max-width:900px; color:var(--paper);}
   .hero h1 em{
     font-style:normal;
-    background:linear-gradient(90deg, var(--ember), #ff5470 60%, var(--ember));
+    background:linear-gradient(90deg, #ffe1c2, #ff5470 60%, #ffe1c2);
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
-  .hero .sub{
-    margin-top:26px;
-    max-width:640px;
-    font-size:18px;
-    color:var(--paper-dim);
-  }
-  .hero-cta{
-    margin-top:44px;
-    display:flex; gap:16px; flex-wrap:wrap;
-  }
+  .hero .sub{margin-top:24px; max-width:660px; font-size:18px; color:var(--paper-dim);}
+  .hero-cta{margin-top:40px; display:flex; gap:16px; flex-wrap:wrap;}
   .btn{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13.5px;
-    padding:14px 24px;
-    border-radius:2px;
-    text-decoration:none;
-    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:14px 24px; border-radius:2px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:10px;
     transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    border:1px solid transparent;
   }
-  .btn-primary{
-    background:linear-gradient(90deg, var(--crimson), var(--ember));
-    color:var(--paper);
-  }
+  .btn-primary{background:linear-gradient(90deg, var(--crimson), var(--ember)); color:var(--paper);}
   .btn-primary:hover{transform:translateY(-1px);}
-  .btn-ghost{
-    border:1px solid var(--line); color:var(--paper);
-  }
-  .btn-ghost:hover{border-color:var(--paper-dim);}
+  .btn-ghost{border-color:rgba(244,238,231,0.4); color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--paper);}
 
-  .hero-meta{
-    margin-top:64px;
-    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .hero-meta div{
-    background:var(--ink); padding:20px 22px;
-  }
-  .hero-meta .num{
-    font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:600;
-  }
-  .hero-meta .lbl{
-    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--paper-dim);
-    margin-top:6px; letter-spacing:0.03em;
-  }
+  .hero-meta{margin-top:60px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(244,238,231,0.18); border:1px solid rgba(244,238,231,0.18);}
+  .hero-meta div{background:rgba(12,1,24,0.55); padding:20px 22px; backdrop-filter:blur(2px);}
+  .hero-meta .num{font-family:'Space Grotesk',sans-serif; font-size:25px; font-weight:600;}
+  .hero-meta .lbl{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--paper-dim); margin-top:6px; letter-spacing:0.03em;}
   @media (max-width:640px){ .hero-meta{grid-template-columns:1fr;} }
 
   /* ---------- SECTION HEADS ---------- */
-  .s-head{max-width:680px; margin-bottom:56px;}
+  .s-head{max-width:700px; margin-bottom:56px;}
   .s-head .eyebrow{margin-bottom:18px;}
   .s-head h2{font-size:clamp(26px,3.4vw,38px);}
   .s-head p{margin-top:18px; color:var(--paper-dim); font-size:16.5px;}
 
-  /* ---------- MATRIX (signature) ---------- */
-  .matrix-section{
-    background:linear-gradient(180deg, var(--ink), #10021f);
-    border-bottom:1px solid var(--line);
-  }
-  .matrix-layout{
-    display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;
-  }
-  @media (max-width:880px){ .matrix-layout{grid-template-columns:1fr; gap:48px;} }
-
-  .matrix-grid{
-    display:grid;
-    grid-template-columns:auto repeat(2, 1fr);
-    grid-template-rows:auto repeat(2, 1fr);
-    gap:6px;
-    font-family:'IBM Plex Mono', monospace;
-  }
-  .m-axis-label{
-    grid-column:2 / span 2;
-    text-align:center;
-    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--paper-dim);
-    padding-bottom:10px;
-  }
-  .m-row-label{
-    display:flex; align-items:center; justify-content:flex-end;
-    writing-mode:vertical-rl; transform:rotate(180deg);
-    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--paper-dim);
-    padding-right:10px;
-  }
-  .m-col-hd, .m-row-hd{
-    font-size:12px; color:var(--paper); text-align:center;
-    padding:8px 4px; display:flex; align-items:center; justify-content:center;
-  }
-  .m-row-hd{justify-content:flex-end; padding-right:12px; text-align:right;}
-  .m-cell{
-    position:relative;
-    aspect-ratio:1/1;
-    border-radius:6px;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding:10px;
-    text-align:center;
-  }
-  .m-cell .pct{font-size:22px; font-weight:600; font-family:'Space Grotesk',sans-serif;}
-  .m-cell .lbl{font-size:10.5px; margin-top:6px; color:rgba(244,238,231,0.72); line-height:1.35;}
-  .m-cell.c1{background:rgba(244,238,231,0.06); color:var(--paper-dim);}
-  .m-cell.c2{background:rgba(244,238,231,0.10); color:var(--paper-dim);}
-  .m-cell.c3{background:linear-gradient(135deg, var(--magenta), var(--violet)); color:var(--paper);}
-  .m-cell.c4{
-    background:linear-gradient(135deg, var(--ember), var(--crimson));
-    color:var(--paper);
-    box-shadow:0 0 0 1px rgba(255,255,255,0.08), 0 18px 40px -12px rgba(200,33,63,0.55);
-  }
-  .m-cell.c4 .pct{font-size:30px;}
-  .matrix-caption{
-    margin-top:26px; font-size:12.5px; color:var(--paper-dim);
-    font-family:'IBM Plex Mono',monospace;
-  }
-  .matrix-text h2{font-size:clamp(24px,3vw,34px); margin-bottom:20px;}
-  .matrix-text p{color:var(--paper-dim); font-size:16.5px; margin-bottom:16px; max-width:520px;}
-  .matrix-text .quote{
-    margin-top:28px; padding-left:20px; border-left:2px solid var(--ember);
+  /* ---------- CERVEAU REPTILIEN ---------- */
+  .trauma{background:var(--ink2); border-bottom:1px solid var(--line);}
+  .trauma-layout{display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center;}
+  @media (max-width:900px){ .trauma-layout{grid-template-columns:1fr; gap:44px;} }
+  .trauma-text p{color:var(--paper-dim); font-size:16.5px; margin-bottom:16px; max-width:540px;}
+  .trauma-text .quote{
+    margin-top:24px; padding-left:20px; border-left:2px solid var(--ember);
     font-family:'Space Grotesk',sans-serif; font-size:18px; color:var(--paper);
   }
+  .brain-diagram{position:relative; display:flex; align-items:center; justify-content:center;}
+  .brain-svg{width:100%; max-width:420px;}
+  .brain-ring{fill:none; stroke-width:1.4;}
+  .brain-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; fill:var(--paper-dim); letter-spacing:0.04em;}
+  .brain-core{font-family:'Space Grotesk',sans-serif; font-size:14px; fill:var(--paper); font-weight:600;}
 
-  /* ---------- TIMELINE ---------- */
-  .timeline{display:flex; flex-direction:column; gap:0;}
-  .t-item{
-    display:grid; grid-template-columns:150px 1fr; gap:32px;
-    padding:32px 0; border-top:1px solid var(--line);
+  /* ---------- METHODE ---------- */
+  .method-steps{display:flex; flex-direction:column;}
+  .m-step{display:grid; grid-template-columns:64px 1fr; gap:28px; padding:30px 0; border-top:1px solid var(--line);}
+  .m-step:last-child{border-bottom:1px solid var(--line);}
+  .m-step .m-num{
+    font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:600; color:var(--ember);
+    display:flex; align-items:flex-start; padding-top:2px;
   }
-  .t-item:last-child{border-bottom:1px solid var(--line);}
-  .t-year{
-    font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--ember);
-    padding-top:2px;
-  }
-  .t-body h3{font-size:19px; margin-bottom:8px; font-weight:600;}
-  .t-body p{color:var(--paper-dim); font-size:15.5px; max-width:600px;}
-  @media (max-width:600px){ .t-item{grid-template-columns:1fr; gap:8px;} }
-
-  /* ---------- TRANSLATION TABLE ---------- */
-  .translate{
-    background:#10021f;
-    border-bottom:1px solid var(--line);
-  }
-  .t-table{border-top:1px solid var(--line);}
-  .t-row{
-    display:grid; grid-template-columns:1fr 28px 1fr;
-    align-items:center;
-    gap:18px;
-    padding:22px 0;
-    border-bottom:1px solid var(--line);
-  }
-  .t-row .jargon{
-    font-family:'IBM Plex Mono',monospace; font-size:14.5px; color:var(--paper-dim);
-    text-decoration:line-through; text-decoration-color:rgba(200,33,63,0.6);
-  }
-  .t-row .arrow{color:var(--ember); text-align:center; font-size:15px;}
-  .t-row .real{font-size:15.5px; color:var(--paper); font-weight:500;}
-  @media (max-width:600px){
-    .t-row{grid-template-columns:1fr; gap:6px; text-align:left;}
-    .t-row .arrow{display:none;}
-  }
-
-  /* ---------- OFFERS ---------- */
-  .offer{
-    border:1px solid var(--line);
-    border-radius:4px;
-    padding:44px;
-    margin-bottom:28px;
-    position:relative;
-    overflow:hidden;
-  }
-  .offer.pillar{
-    background:linear-gradient(160deg, rgba(122,0,50,0.16), rgba(27,0,71,0.3));
-    border-color:rgba(200,33,63,0.35);
-  }
-  .offer-tag{
-    font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:0.1em;
-    text-transform:uppercase; color:var(--ember);
-    margin-bottom:16px; display:block;
-  }
-  .offer h3{font-size:26px; margin-bottom:14px;}
-  .offer > p{color:var(--paper-dim); max-width:620px; margin-bottom:32px; font-size:15.5px;}
-  .deliverables{
-    display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
-    background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden;
-  }
-  .deliverables div{background:rgba(12,1,24,0.5); padding:20px 22px;}
-  .deliverables .d-name{
+  .m-step h3{font-size:19px; margin-bottom:8px; font-weight:600;}
+  .m-step p{color:var(--paper-dim); font-size:15.5px; max-width:640px;}
+  .method-name{
+    display:inline-block; margin-top:6px; padding:5px 12px;
+    border:1px solid rgba(200,33,63,0.4); border-radius:2px;
     font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ember);
-    margin-bottom:8px; text-transform:uppercase; letter-spacing:0.04em;
   }
-  .deliverables .d-desc{font-size:14.5px; color:var(--paper-dim);}
-  @media (max-width:680px){ .deliverables{grid-template-columns:1fr;} .offer{padding:28px;} }
-  .offer-foot{
-    margin-top:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+  @media (max-width:600px){ .m-step{grid-template-columns:1fr; gap:8px;} }
+
+  /* ---------- ECOSYSTEMES ---------- */
+  .eco{background:var(--ink2); border-bottom:1px solid var(--line);}
+  .eco-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:880px){ .eco-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .eco-grid{grid-template-columns:1fr;} }
+  .eco-cell{background:var(--ink); padding:30px 26px;}
+  .eco-cell .e-tag{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ember); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:10px;}
+  .eco-cell h3{font-size:17px; margin-bottom:8px; font-weight:600;}
+  .eco-cell p{font-size:14.5px; color:var(--paper-dim);}
+
+  /* ---------- OFFRE ---------- */
+  .offer{
+    border:1px solid rgba(200,33,63,0.35); border-radius:4px; padding:48px;
+    background:linear-gradient(160deg, rgba(122,0,50,0.16), rgba(27,0,71,0.3));
   }
-  .offer-foot .duration{
-    font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--paper-dim);
-  }
+  @media (max-width:680px){ .offer{padding:28px;} }
+  .offer-tag{font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ember); margin-bottom:16px; display:block;}
+  .offer h3{font-size:27px; margin-bottom:14px;}
+  .offer > p.lead{color:var(--paper-dim); max-width:640px; margin-bottom:36px; font-size:16px;}
+  .tiers{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(244,238,231,0.14); border:1px solid rgba(244,238,231,0.14); border-radius:3px; overflow:hidden; margin-bottom:34px;}
+  @media (max-width:680px){ .tiers{grid-template-columns:1fr;} }
+  .tier{background:rgba(12,1,24,0.55); padding:26px 24px;}
+  .tier .t-label{font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--paper-dim); margin-bottom:10px;}
+  .tier .t-price{font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:600; margin-bottom:10px;}
+  .tier .t-price span{font-size:14px; color:var(--paper-dim); font-weight:400;}
+  .tier p{font-size:14px; color:var(--paper-dim);}
+  .offer-note{font-size:14px; color:var(--paper-dim); border-top:1px solid rgba(244,238,231,0.14); padding-top:22px; margin-bottom:30px;}
+  .offer-foot{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;}
 
   /* ---------- CASES ---------- */
-  .cases{background:#10021f; border-bottom:1px solid var(--line);}
+  .cases{border-bottom:1px solid var(--line);}
   .case-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
   @media (max-width:880px){ .case-grid{grid-template-columns:1fr;} }
-  .case{background:var(--ink); padding:34px 30px; display:flex; flex-direction:column; gap:14px;}
-  .case .c-tag{
-    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--paper-dim);
-    text-transform:uppercase; letter-spacing:0.08em;
-  }
+  .case{background:var(--ink2); padding:34px 30px; display:flex; flex-direction:column; gap:14px;}
+  .case .c-tag{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--paper-dim); text-transform:uppercase; letter-spacing:0.08em;}
   .case h3{font-size:18px; font-weight:600;}
   .case p{font-size:14.5px; color:var(--paper-dim);}
-  .case .c-result{
-    margin-top:auto; padding-top:14px; border-top:1px solid var(--line);
-    font-size:13.5px; color:var(--paper); font-family:'IBM Plex Mono',monospace;
-  }
+  .case .c-result{margin-top:auto; padding-top:14px; border-top:1px solid var(--line); font-size:13.5px; color:var(--paper); font-family:'IBM Plex Mono',monospace;}
 
   /* ---------- ICP ---------- */
+  .persona{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center;
+    border:1px solid var(--line); border-radius:4px; padding:44px; margin-bottom:40px;
+    background:rgba(244,238,231,0.03);
+  }
+  @media (max-width:880px){ .persona{grid-template-columns:1fr; gap:28px; padding:28px;} }
+  .persona-badge{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--ember); margin-bottom:14px;
+  }
+  .persona h3{font-size:24px; margin-bottom:14px;}
+  .persona p{color:var(--paper-dim); font-size:15.5px;}
+  .persona-visual{
+    aspect-ratio:1/1; border-radius:4px;
+    background:linear-gradient(135deg, var(--magenta), var(--indigo));
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;
+    border:1px solid rgba(244,238,231,0.14);
+  }
+  .persona-visual .pv-inner{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--paper);}
+  .persona-visual .pv-inner .big{display:block; font-family:'Space Grotesk',sans-serif; font-size:30px; font-weight:600; margin-bottom:10px;}
+
   .icp-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden;}
   @media (max-width:720px){ .icp-grid{grid-template-columns:1fr;} }
-  .icp-col{background:var(--ink); padding:36px;}
+  .icp-col{background:var(--ink); padding:34px;}
   .icp-col.green{background:linear-gradient(180deg, rgba(244,238,231,0.05), transparent);}
   .icp-col.red{background:linear-gradient(180deg, rgba(150,0,42,0.14), transparent);}
-  .icp-col h3{
-    font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.06em;
-    text-transform:uppercase; margin-bottom:22px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .icp-col h3 .sq{width:9px; height:9px; border-radius:2px; display:inline-block;}
-  .icp-col.green h3 .sq{background:var(--paper-dim);}
-  .icp-col.red h3 .sq{background:var(--ember);}
+  .icp-col h4{font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:10px;}
+  .icp-col h4 .sq{width:9px; height:9px; border-radius:2px; display:inline-block;}
+  .icp-col.green h4 .sq{background:var(--paper-dim);}
+  .icp-col.red h4 .sq{background:var(--ember);}
   .icp-col ul{list-style:none;}
-  .icp-col li{
-    font-size:15px; color:var(--paper-dim); padding:14px 0; border-top:1px solid var(--line);
-  }
+  .icp-col li{font-size:14.5px; color:var(--paper-dim); padding:13px 0; border-top:1px solid var(--line);}
   .icp-col li:first-of-type{border-top:none;}
-  .icp-col.red li{color:rgba(244,238,231,0.78);}
 
-  /* ---------- ABOUT / BIO ---------- */
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--ink2); border-bottom:1px solid var(--line);}
   .about-layout{display:grid; grid-template-columns:0.8fr 1.2fr; gap:64px;}
   @media (max-width:880px){ .about-layout{grid-template-columns:1fr; gap:36px;} }
   .about-layout p{color:var(--paper-dim); font-size:16.5px; margin-bottom:18px;}
   .about-layout p strong{color:var(--paper); font-weight:600;}
 
   /* ---------- CONTACT ---------- */
-  .contact{
-    background:linear-gradient(160deg, var(--indigo), var(--ink) 60%);
-    border-top:1px solid var(--line);
-    text-align:center;
-  }
-  .contact h2{font-size:clamp(28px,4vw,44px); max-width:760px; margin:0 auto 20px;}
-  .contact p{color:var(--paper-dim); max-width:520px; margin:0 auto 40px; font-size:16.5px;}
+  .contact{background:linear-gradient(160deg, var(--indigo), var(--ink) 60%); text-align:center;}
+  .contact h2{font-size:clamp(28px,4vw,44px); max-width:780px; margin:0 auto 20px;}
+  .contact p{color:var(--paper-dim); max-width:540px; margin:0 auto 38px; font-size:16.5px;}
   .contact-links{display:flex; justify-content:center; gap:18px; flex-wrap:wrap;}
 
-  footer{
-    padding:36px 0; border-top:1px solid var(--line);
-  }
+  footer{padding:36px 0; border-top:1px solid var(--line);}
   footer .mono{font-size:12.5px; color:var(--paper-dim);}
   footer .foot-links{display:flex; gap:22px;}
   footer .foot-links a{font-size:12.5px; color:var(--paper-dim); text-decoration:none;}
@@ -391,25 +256,22 @@
 
   ::selection{background:var(--ember); color:var(--paper);}
   :focus-visible{outline:2px solid var(--ember); outline-offset:3px;}
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{transition:none !important;}
-  }
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{transition:none !important;} }
 </style>
 </head>
 <body>
 
 <header class="nav">
   <div class="wrap">
-    <a href="#top" class="nav-mark"><span class="dot"></span>D. DETTE&nbsp;TECHNIQUE</a>
-    <nav class="nav-links" id="navLinks">
-      <a href="#conviction">Conviction</a>
-      <a href="#offres">Offres</a>
-      <a href="#preuves">Preuves</a>
-      <a href="#icp">Pour qui</a>
+    <a href="#top" class="nav-mark"><span class="dot"></span>F. GONÇALVES — DETTE&nbsp;TECHNIQUE</a>
+    <nav class="nav-links">
+      <a href="#methode">Méthode</a>
+      <a href="#ecosystemes">Écosystèmes</a>
+      <a href="#offre">Diagnostic</a>
+      <a href="#pour-qui">Pour qui</a>
+      <a href="#cas">Cas vécus</a>
     </nav>
-    <a href="#contact" class="nav-cta">Discuter d'un audit</a>
+    <a href="#contact" class="nav-cta">Demander un diagnostic</a>
   </div>
 </header>
 
@@ -418,230 +280,223 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner wrap">
-      <div class="eyebrow">Audit Dataiku &amp; no-code — consultant indépendant</div>
-      <h1>Je ne viens pas ajouter des fonctionnalités.<br>Je viens dire ce que votre <em>dette technique</em> refuse qu'on nomme — et y mettre un chiffre.</h1>
-      <p class="sub">25 ans à observer le balancier du métier — du développeur roi à la défiance post-bulle, jusqu'au no-code et à l'IA générative d'aujourd'hui. Même mythe, nouvelle forme. Mêmes conséquences si personne ne les nomme.</p>
+      <div class="eyebrow">Consultant indépendant — dette technique, tous écosystèmes</div>
+      <h1>Votre dette technique a un nom que personne dans votre organisation ne veut prononcer. <em>Moi, je le prononce — et j'y mets un chiffre.</em></h1>
+      <p class="sub">25 ans à l'intérieur des DSI, à voir ce qui merde avant que ça merde. En 15 jours, je vous rends une image claire et chiffrée de votre existant — Dataiku et plateformes low-code, code métier caché, applications backend, processus inter-applicatifs, chaînes d'ordonnanceurs — pour que vous puissiez décider en connaissance de cause.</p>
       <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Discuter d'un audit →</a>
-        <a href="#offres" class="btn btn-ghost">Voir la méthode</a>
+        <a href="#contact" class="btn btn-primary">Demander un diagnostic →</a>
+        <a href="#methode" class="btn btn-ghost">Voir la méthode</a>
       </div>
       <div class="hero-meta">
         <div>
           <div class="num">25 ans</div>
-          <div class="lbl">DE RECUL SUR LES CYCLES DU GÉNIE LOGICIEL</div>
+          <div class="lbl">à l'intérieur des DSI, tous secteurs</div>
         </div>
         <div>
-          <div class="num">3</div>
-          <div class="lbl">CYCLES VÉCUS — BULLE, OFFSHORE, NO-CODE/IA</div>
+          <div class="num">15 jours</div>
+          <div class="lbl">pour une vision claire et chiffrée de l'existant</div>
         </div>
         <div>
-          <div class="num">2–4 sem.</div>
-          <div class="lbl">DURÉE TYPE D'UN AUDIT DE DETTE TECHNIQUE</div>
+          <div class="num">1 livrable</div>
+          <div class="lbl">une décision, pas un rapport de plus</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MATRICE SIGNATURE -->
-  <section class="matrix-section">
-    <div class="wrap matrix-layout">
-      <div>
-        <div class="matrix-grid">
-          <div></div>
-          <div class="m-axis-label" style="grid-column:2/span 2;">État réel du projet</div>
-          <div class="m-row-label" style="grid-row:3/span 2;">Annoncé au CODIR</div>
-          <div></div>
-          <div class="m-col-hd mono">Terminé</div>
-          <div class="m-col-hd mono">En construction</div>
-          <div class="m-row-hd mono">Terminé</div>
-          <div class="m-cell c1"><div class="pct">12%</div><div class="lbl">Vraiment fini.<br>Rare, mais ça existe.</div></div>
-          <div class="m-cell c4"><div class="pct">61%</div><div class="lbl">Le point aveugle.<br>Vendu comme fini,<br>en réalité un POC.</div></div>
-          <div class="m-row-hd mono">En construction</div>
-          <div class="m-cell c2"><div class="pct">9%</div><div class="lbl">Assumé et cadré.<br>Le cas sain.</div></div>
-          <div class="m-cell c3"><div class="pct">18%</div><div class="lbl">Connu en interne,<br>jamais remonté.</div></div>
-        </div>
-        <div class="matrix-caption">Illustration — répartition typique observée sur un parc de projets Dataiku / no-code non audité.</div>
+  <!-- LE CERVEAU REPTILIEN DE L'ENTREPRISE -->
+  <section class="trauma">
+    <div class="wrap trauma-layout">
+      <div class="trauma-text">
+        <div class="eyebrow">Pourquoi ça bloque</div>
+        <h2 style="font-size:clamp(24px,3vw,34px); margin-bottom:20px;">Une entreprise a, elle aussi, un cerveau reptilien.</h2>
+        <p>Une mise en production qui casse tout, un projet à mille flux qui explose en plein vol : le choc remonte jusqu'à la direction, et à partir de là, plus personne ne veut en entendre parler. On met ceinture, bretelles, on scotche. Le sujet devient tabou — pas par mauvaise foi, par réflexe de survie organisationnel.</p>
+        <p>Résultat : une masse de rustines qu'on ne peut plus bouger, un empilement de cas particuliers que le génie logiciel sait résoudre depuis quarante ans — mais que personne, en interne, n'a le mandat politique de nommer.</p>
+        <div class="quote">Je ne viens pas raviver ce traumatisme. Je viens avec un chiffre, un tiers neutre, et un plan par paliers — la seule façon de faire remonter l'information sans déclencher la panique.</div>
       </div>
-      <div class="matrix-text">
-        <div class="eyebrow">La matrice de confusion, appliquée à votre parc projets</div>
-        <h2>Le sujet n'est jamais la compétence technique.</h2>
-        <p>C'est le rapport culturel à l'échec et à l'amortissement. Une fois les 100 premiers euros dépensés, la comptabilité française impose qu'ils soient rentabilisés coûte que coûte — on empile des rustines plutôt que de jeter et recommencer.</p>
-        <p>Résultat : des projets déclarés « terminés » qui sont en réalité des POC stabilisés à la main, une dette qui ne peut jamais être nommée officiellement — car la nommer, c'est admettre une erreur passée et sortir un budget hors des cases classiques.</p>
-        <div class="quote">Le marché ne manque pas d'experts Dataiku. Il manque de gens qui disent tout haut ce que la diagonale de cette matrice devrait montrer — et qui ne le fait pas.</div>
+      <div class="brain-diagram">
+        <svg class="brain-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <circle class="brain-ring" cx="200" cy="200" r="170" stroke="rgba(244,238,231,0.14)"/>
+          <circle class="brain-ring" cx="200" cy="200" r="120" stroke="rgba(244,238,231,0.20)"/>
+          <circle cx="200" cy="200" r="70" fill="url(#g1)"/>
+          <defs>
+            <radialGradient id="g1" cx="35%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#ff5470"/>
+              <stop offset="100%" stop-color="#7a0032"/>
+            </radialGradient>
+          </defs>
+          <text x="200" y="204" text-anchor="middle" class="brain-core">Le choc</text>
+          <text x="200" y="52" text-anchor="middle" class="brain-label">RUSTINE SUR RUSTINE</text>
+          <text x="200" y="352" text-anchor="middle" class="brain-label">DETTE JAMAIS NOMMÉE</text>
+          <text x="30" y="204" text-anchor="middle" class="brain-label" transform="rotate(-90 30 204)">SILENCE ORGANISATIONNEL</text>
+          <text x="372" y="204" text-anchor="middle" class="brain-label" transform="rotate(90 372 204)">PEUR DE REJOUER L'ÉCHEC</text>
+        </svg>
       </div>
     </div>
   </section>
 
-  <!-- CONVICTION / TIMELINE -->
-  <section id="conviction">
+  <!-- METHODE -->
+  <section id="methode">
     <div class="wrap">
       <div class="s-head">
-        <div class="eyebrow">La conviction</div>
-        <h2>Le balancier du métier tourne depuis 25 ans. Je l'ai vu tourner trois fois.</h2>
-        <p>À chaque tour, on annonce que « cette fois, c'est différent ». Ce n'est jamais le cas — seule la façade change.</p>
+        <div class="eyebrow">Méthodologie</div>
+        <h2>La Méthode de la Diagonale</h2>
+        <p>Le nom vient d'une matrice de confusion : sur la diagonale, ce qui est annoncé correspond à ce qui est réel. En dehors, c'est le point aveugle. Ma méthode consiste à ramener votre organisation sur cette diagonale — étape par étape, sans brutalité.</p>
       </div>
-      <div class="timeline">
-        <div class="t-item">
-          <div class="t-year mono">1999–2001</div>
-          <div class="t-body">
-            <h3>Le développeur est roi</h3>
-            <p>Début de carrière en pleine bulle internet. La technique dicte le rythme, le fonctionnel suit.</p>
+      <div class="method-steps">
+        <div class="m-step">
+          <div class="m-num">01</div>
+          <div>
+            <h3>Cartographie du terrain déclaré</h3>
+            <p>Inventaire de ce que l'organisation présente comme son existant : flux Dataiku ou plateforme low-code, applications backend, processus inter-services, chaînes d'ordonnanceurs. Entretiens ciblés — pas seulement la documentation, qui ment presque toujours par omission.</p>
           </div>
         </div>
-        <div class="t-item">
-          <div class="t-year mono">2001–2010s</div>
-          <div class="t-body">
-            <h3>Éclatement de la bulle, défiance durable</h3>
-            <p>Chômage, retour à l'université pour une licence en génie logiciel. Le balancier repart à l'opposé : le métier reprend la main, la défiance envers les techs s'installe et alimente l'essor de l'offshore et du nearshore.</p>
+        <div class="m-step">
+          <div class="m-num">02</div>
+          <div>
+            <h3>Vérification empirique — remplir la diagonale</h3>
+            <p>Je ne me fie jamais à une déclaration de statut. Je teste la reproductibilité (peut-on rejouer un mois, une version passée ?), je trace les dépendances réelles, je débusque le code caché derrière l'outil low-code, je vérifie ce qui tourne vraiment en production plutôt qu'en développement.</p>
           </div>
         </div>
-        <div class="t-item">
-          <div class="t-year mono">Aujourd'hui</div>
-          <div class="t-body">
-            <h3>No-code et IA générative rejouent le même mythe</h3>
-            <p>« Le dev est à la portée de tous. » Même promesse, nouvelle forme — avec les mêmes conséquences prévisibles : dette technique, projets inmaintenables, livraisons périlleuses.</p>
+        <div class="m-step">
+          <div class="m-num">03</div>
+          <div>
+            <h3>Score de dette et traduction budgétaire</h3>
+            <p>Chaque écart entre l'annoncé et le réel est noté par flux critique, puis traduit en langage financier — celui qui permet à un sponsor de débloquer un budget sans avoir à dire publiquement « on s'est trompés ».</p>
+          </div>
+        </div>
+        <div class="m-step">
+          <div class="m-num">04</div>
+          <div>
+            <h3>Plan de stabilisation par paliers</h3>
+            <p>Jamais une refonte totale — invendable, et rarement nécessaire. Des paliers actionnables, ordonnés par risque et par gain, que vos équipes ou les miennes peuvent exécuter sans tout arrêter.</p>
+          </div>
+        </div>
+        <div class="m-step">
+          <div class="m-num">05</div>
+          <div>
+            <h3>Restitution décisionnelle</h3>
+            <p>Un livrable pensé pour un CODIR ou une direction générale : une image claire de la situation, pas un rapport technique de plus dans un tiroir.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TRADUCTION DU JARGON -->
-  <section class="translate">
+  <!-- ECOSYSTEMES -->
+  <section class="eco" id="ecosystemes">
     <div class="wrap">
       <div class="s-head">
-        <div class="eyebrow">Ce que le vocabulaire maquille</div>
-        <h2>Le système entier est construit pour euphémiser la dette.</h2>
-        <p>Vocabulaire, gouvernance, comptabilité : tout est aligné pour qu'un problème réel n'ait jamais besoin d'être nommé.</p>
+        <div class="eyebrow">Terrain d'intervention</div>
+        <h2>La dette technique ne se limite pas à un outil.</h2>
+        <p>Le sujet est le même partout : l'écart entre ce qui est annoncé et ce qui tourne réellement. Seul le terrain change.</p>
       </div>
-      <div class="t-table">
-        <div class="t-row">
-          <div class="jargon mono">« Run »</div>
-          <div class="arrow">→</div>
-          <div class="real">Une prod qui, souvent, n'existe pas vraiment — tout se joue en dev.</div>
+      <div class="eco-grid">
+        <div class="eco-cell">
+          <div class="e-tag">Low-code / no-code</div>
+          <h3>Dataiku &amp; plateformes équivalentes</h3>
+          <p>Distinguer ce qui est vraiment low-code de ce qui est du Python pur embarqué dans l'outil par des utilisateurs qui refusent de l'apprendre.</p>
         </div>
-        <div class="t-row">
-          <div class="jargon mono">« Amélioration continue »</div>
-          <div class="arrow">→</div>
-          <div class="real">De la TMA qu'on n'ose plus appeler par son nom.</div>
+        <div class="eco-cell">
+          <div class="e-tag">Code métier</div>
+          <h3>Scripts et applicatifs cachés</h3>
+          <p>Le code que personne ne revendique officiellement — développé sur le côté, sans revue, sans tests, mais dont un process critique dépend chaque mois.</p>
         </div>
-        <div class="t-row">
-          <div class="jargon mono">« Agilité »</div>
-          <div class="arrow">→</div>
-          <div class="real">L'alibi d'un cadrage qui n'a jamais eu lieu — le dev devient l'outil de découverte du besoin.</div>
+        <div class="eco-cell">
+          <div class="e-tag">Legacy</div>
+          <h3>Applications backend</h3>
+          <p>Bases mal normées, structures imposées par une IHM d'un autre temps, requêtes devenues quasi impossibles — le socle qu'on n'ose plus toucher.</p>
         </div>
-        <div class="t-row">
-          <div class="jargon mono">« Low-code »</div>
-          <div class="arrow">→</div>
-          <div class="real">Du Python pur embarqué dans l'outil par des devs qui refusent de l'apprendre — un runtime de luxe sans les garde-fous du génie logiciel.</div>
+        <div class="eco-cell">
+          <div class="e-tag">Ordonnancement</div>
+          <h3>Chaînes de traitements batch</h3>
+          <p>Ordonnanceurs, tâches planifiées, dépendances amont non documentées — le traitement annuel que plus personne ne sait vraiment rejouer.</p>
+        </div>
+        <div class="eco-cell">
+          <div class="e-tag">Organisation</div>
+          <h3>Processus inter-applicatifs</h3>
+          <p>Le point où la responsabilité se dilue entre équipes, où chacun présume que « ça, c'est géré par l'autre service ».</p>
+        </div>
+        <div class="eco-cell">
+          <div class="e-tag">Gouvernance</div>
+          <h3>Vocabulaire et reporting</h3>
+          <p>« Run », « amélioration continue », « agilité » : le système de reporting lui-même, souvent construit pour euphémiser plutôt que pour informer.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- OFFRES -->
-  <section id="offres">
+  <!-- OFFRE -->
+  <section id="offre">
     <div class="wrap">
       <div class="s-head">
-        <div class="eyebrow">Ce que je propose</div>
-        <h2>Deux offres, une seule conviction.</h2>
-        <p>L'audit capitalise directement sur ce que je sais faire depuis 25 ans : nommer. L'accompagnement est un mode d'exécution, plus classique, pour les structures plus petites.</p>
+        <div class="eyebrow">Ce que vous achetez</div>
+        <h2>Un diagnostic. Pas du temps.</h2>
+        <p>Ce que vous achetez, c'est la clarté nécessaire pour décider — pas des jours de prestation. Le prix correspond au livrable, pas au nombre d'heures passées à le produire.</p>
       </div>
-
-      <div class="offer pillar">
-        <span class="offer-tag">Offre pilier</span>
-        <h3>Audit Dataiku / no-code — Diagnostic de dette technique</h3>
-        <p>Une mission courte et cadrée dans le temps, qui traduit une dette technique niée en langage budgétaire — le pont qui permet à un sponsor de débloquer un budget sans avoir à dire publiquement « on s'est trompés ».</p>
-        <div class="deliverables">
-          <div>
-            <div class="d-name">Cartographie des flux</div>
-            <div class="d-desc">Distinguer ce qui est vraiment « low-code » de ce qui est du code — Python notamment — caché dans l'outil.</div>
-          </div>
-          <div>
-            <div class="d-name">Grille de risque</div>
-            <div class="d-desc">Non-reproductibilité, dépendances non maîtrisées, absence de garde-fous — notées flux critique par flux critique.</div>
-          </div>
-          <div>
-            <div class="d-name">Score de dette</div>
-            <div class="d-desc">Traduction financière de ce que l'entreprise refuse de nommer techniquement — le pont vers le CODIR et la DSI.</div>
-          </div>
-          <div>
-            <div class="d-name">Plan de stabilisation priorisé</div>
-            <div class="d-desc">Pas une refonte totale et invendable, mais des paliers actionnables, ordonnés par risque.</div>
-          </div>
-        </div>
-        <div class="offer-foot">
-          <span class="duration mono">Durée type : 2 à 4 semaines</span>
-          <a href="#contact" class="btn btn-primary">Cadrer un audit →</a>
-        </div>
-      </div>
-
       <div class="offer">
-        <span class="offer-tag" style="color:var(--paper-dim);">Offre secondaire</span>
-        <h3>Accompagnement no-code en direct</h3>
-        <p>Pour les structures plus petites, en dehors du modèle ESN : facturation au temps passé, interventions ciblées — déblocages ponctuels, conseil d'architecture, montée en compétence des équipes internes. Un vrai relationnel dev/client, sans écran d'intermédiaire.</p>
+        <span class="offer-tag">Diagnostic de dette technique</span>
+        <h3>La Méthode de la Diagonale, appliquée à votre organisation</h3>
+        <p class="lead">Aussi appelé « audit » pour les grands comptes habitués à ce vocabulaire normalisé, ou « état des lieux » / « bilan de l'existant » pour une PME dont le dirigeant achète moins souvent ce type de prestation. Le fond ne change pas.</p>
+        <div class="tiers">
+          <div class="tier">
+            <div class="t-label">Périmètre ciblé</div>
+            <div class="t-price">À partir de 3 000 €</div>
+            <p>Un processus, une application, une chaîne de traitement précise. Idéal pour un premier terrain de confiance avant d'engager un diagnostic complet.</p>
+          </div>
+          <div class="tier">
+            <div class="t-label">Diagnostic d'organisation</div>
+            <div class="t-price">15 000 € <span>/ 15 jours calendaires</span></div>
+            <p>Cartographie complète, score de dette, plan de stabilisation priorisé et restitution décisionnelle pour votre CODIR ou votre direction générale.</p>
+          </div>
+        </div>
+        <p class="offer-note">Le délai calendaire intègre les allers-retours et la vérification empirique — pas seulement le temps de rédaction. Chaque diagnostic se termine par une restitution orale, pas seulement un document.</p>
         <div class="offer-foot">
-          <span class="duration mono">Facturation au temps passé</span>
-          <a href="#contact" class="btn btn-ghost">En discuter →</a>
+          <span class="mono" style="font-size:13px; color:var(--paper-dim);">Sans engagement — premier échange de 15 minutes, sans vente</span>
+          <a href="#contact" class="btn btn-primary">Cadrer un premier échange →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PREUVES -->
-  <section class="cases" id="preuves">
-    <div class="wrap">
-      <div class="s-head">
-        <div class="eyebrow">Preuves de méthode</div>
-        <h2>Trois terrains, un même diagnostic répété.</h2>
-        <p>Situations anonymisées — le détail des organisations reste confidentiel, la méthode ne l'est pas.</p>
-      </div>
-      <div class="case-grid">
-        <div class="case">
-          <span class="c-tag mono">Secteur bancaire</span>
-          <h3>1000+ projets Dataiku, 80% de code caché</h3>
-          <p>Le consultant précédent avait été évincé après un mois — une livraison ayant cassé une chaîne métier. Constat plus large : des data scientists « hackent » l'outil low-code avec du Python pur, sans les garde-fous du génie logiciel classique.</p>
-          <div class="c-result">→ Le pire des deux mondes, nommé et documenté.</div>
-        </div>
-        <div class="case">
-          <span class="c-tag mono">Assurance</span>
-          <h3>Un traitement annuel dangereux, une refonte invendable</h3>
-          <p>Une base mal normée, des requêtes quasi impossibles. Contexte favorable (DSI, mindset informaticien) : plutôt qu'une refonte hors budget, une solution technique de contournement — brillante, mais qui pérennise l'inefficience.</p>
-          <div class="c-result">→ Diagnostic posé, arbitrage assumé par le client.</div>
-        </div>
-        <div class="case">
-          <span class="c-tag mono">Grand groupe international</span>
-          <h3>Un projet « fini » qui était en réalité un POC</h3>
-          <p>Non-reproductibilité des résultats mois après mois. Mise en place d'exécutions « à blanc » avant chaque clôture — une forme d'intégration continue manuelle, là où rien n'existait. La solution root-cause (snapshots des référentiels) a été jugée « trop structurante » et refusée.</p>
-          <div class="c-result">→ Le risque documenté, la décision de ne pas le traiter aussi.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ICP -->
-  <section id="icp">
+  <!-- POUR QUI -->
+  <section id="pour-qui">
     <div class="wrap">
       <div class="s-head">
         <div class="eyebrow">Pour qui</div>
-        <h2>L'audit fonctionne dans un contexte précis. Ailleurs, il devient invendable.</h2>
-        <p>La différence tient rarement à la technique — presque toujours au sponsor et au moment.</p>
+        <h2>Un persona précis, avant tout le reste.</h2>
+        <p>Le diagnostic fonctionne dans un contexte donné. Ailleurs, il devient invendable — la différence tient rarement à la technique.</p>
       </div>
+
+      <div class="persona">
+        <div>
+          <div class="persona-badge">Le persona principal</div>
+          <h3>Le DSI qui vient d'arriver</h3>
+          <p>Fraîchement nommé ou recruté, il doit comprendre vite ce qui se passe réellement dans son organisation — et n'a pas toujours le temps ni le niveau technique pour aller chercher le fond du fond lui-même. Il n'a pas construit sa légitimité sur le succès affiché des projets en place : il a au contraire tout intérêt à faire émerger la vérité, car elle sert son narratif d'arrivée, pas celui de son prédécesseur.</p>
+        </div>
+        <div class="persona-visual">
+          <div class="pv-inner">
+            <span class="big">J0</span>
+            « Fais-moi l'audit complet. Donne-moi une image claire pour que je puisse décider. »
+          </div>
+        </div>
+      </div>
+
       <div class="icp-grid">
         <div class="icp-col green">
-          <h3><span class="sq"></span>Terrain favorable</h3>
+          <h4><span class="sq"></span>Terrain favorable</h4>
           <ul>
             <li>Interlocuteur DSI, ou profil « mindset informaticien » — pas le métier seul</li>
             <li>Moment de transition : nouveau DSI, nouveau responsable data, consultant précédent évincé</li>
-            <li>Volume suffisant pour que la dette soit visible et chiffrable (1000+ projets, par exemple)</li>
-            <li>Un sponsor qui a besoin d'une « couverture » externe pour poser une question inconfortable</li>
+            <li>Volume suffisant pour que la dette soit visible et chiffrable</li>
+            <li>Un sponsor qui a besoin d'une couverture externe pour poser une question inconfortable</li>
           </ul>
         </div>
         <div class="icp-col red">
-          <h3><span class="sq"></span>Terrain défavorable</h3>
+          <h4><span class="sq"></span>Terrain défavorable</h4>
           <ul>
             <li>Client = le métier seul, sans relais DSI — le vocabulaire technique n'est qu'un vernis</li>
-            <li>Guerre inter-ESN sur le même compte — dire une vérité inconfortable devient un risque disproportionné</li>
+            <li>Guerre inter-ESN sur le même compte — une vérité inconfortable devient un risque disproportionné</li>
             <li>Un responsable qui a construit sa légitimité sur le succès affiché du projet</li>
             <li>Personne ne sait dire quel a été le dernier mois qu'il a fallu rejouer, ni pourquoi</li>
           </ul>
@@ -650,17 +505,48 @@
     </div>
   </section>
 
+  <!-- CAS VECUS -->
+  <section class="cases" id="cas">
+    <div class="wrap">
+      <div class="s-head">
+        <div class="eyebrow">Preuves de méthode</div>
+        <h2>Trois écosystèmes, un même mécanisme.</h2>
+        <p>Situations anonymisées — le détail des organisations reste confidentiel, le mécanisme ne l'est pas.</p>
+      </div>
+      <div class="case-grid">
+        <div class="case">
+          <span class="c-tag mono">Secteur bancaire — low-code</span>
+          <h3>1000+ flux, 80% de code caché</h3>
+          <p>Après un échec massif resté gravé dans l'organisation, plus personne n'osait recadrer l'usage de l'outil low-code. Résultat : un runtime Python géant, jusqu'aux utilisateurs métier qui codent — et l'IT qui leur fait support sur PySpark.</p>
+          <div class="c-result">→ Le pire des deux mondes, nommé et documenté.</div>
+        </div>
+        <div class="case">
+          <span class="c-tag mono">Assurance — ordonnancement</span>
+          <h3>Un traitement batch annuel, jamais sorti</h3>
+          <p>Un drain financier récurrent pour maintenir en vie un traitement annuel critique, sur une base mal normée par une IHM d'un autre temps. La refonte, chiffrée trop lourde, n'a jamais été lancée — seul un contournement technique a tenu la chaîne en vie.</p>
+          <div class="c-result">→ Diagnostic posé, arbitrage assumé par le client.</div>
+        </div>
+        <div class="case">
+          <span class="c-tag mono">Grand groupe international — processus</span>
+          <h3>Un projet « fini » qui était en réalité un POC</h3>
+          <p>Non-reproductibilité des résultats mois après mois. Mise en place d'exécutions « à blanc » avant chaque clôture — une forme d'intégration continue manuelle, là où rien n'existait. La solution root-cause a été jugée « trop structurante » et refusée.</p>
+          <div class="c-result">→ Le risque documenté, la décision de ne pas le traiter aussi.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- QUI JE SUIS -->
-  <section class="translate">
+  <section class="about">
     <div class="wrap about-layout">
       <div>
         <div class="eyebrow">Qui je suis</div>
-        <h2 style="font-size:clamp(24px,3vw,32px);">Consultant informatique depuis 2001.</h2>
+        <h2 style="font-size:clamp(24px,3vw,32px);">25 ans à l'intérieur des DSI.</h2>
       </div>
       <div>
-        <p><strong>Salarié IT de 1999 à 2001</strong>, puis ESN, puis <strong>freelance en EURL depuis 2022.</strong> Spécialiste Dataiku ces dernières années, avec un recul de 25 ans sur les cycles du métier.</p>
-        <p>Ma conviction centrale : <strong>les outils no-code / low-code et l'IA ne suppriment pas les problématiques de génie logiciel</strong> — coût de maintenance, difficulté d'évolution, livraisons périlleuses. Elles les déplacent, et souvent les aggravent.</p>
-        <p>Avec l'âge et l'expérience, je refuse de plus en plus les attentes implicites non formulées — être incorporé dans une équipe en difficulté sans mandat clair, faire une refonte non financée sur mon temps personnel. Le flou de cadrage est souvent à dessein : il permet de nier après coup. Je préfère un périmètre clair, même court, à une relation floue et longue.</p>
+        <p><strong>Consultant informatique depuis 2001</strong> — salarié IT de 1999 à 2001, puis ESN, puis <strong>freelance en EURL depuis 2022.</strong> J'ai traversé trois cycles complets du métier : le développeur roi de la bulle internet, la défiance et l'offshore qui ont suivi son éclatement, et aujourd'hui le no-code et l'IA générative qui rejouent la même promesse.</p>
+        <p>Ma conviction, forgée sur ces trois cycles : <strong>les outils no-code, low-code et l'IA ne suppriment pas les problématiques de génie logiciel</strong> — coût de maintenance, difficulté d'évolution, livraisons périlleuses. Elles les déplacent, et souvent les aggravent, quel que soit l'écosystème.</p>
+        <p>Aujourd'hui, je ne vends plus mon temps de développeur. Je vends la clarté d'un diagnostic — la capacité à dire où ça va merder avant que ça merde, et à donner à une direction les moyens de décider en connaissance de cause.</p>
       </div>
     </div>
   </section>
@@ -669,10 +555,10 @@
   <section class="contact" id="contact">
     <div class="wrap">
       <div class="eyebrow" style="justify-content:center;">Prochaine étape</div>
-      <h2>Un projet Dataiku ou no-code dont personne ne veut nommer l'état réel ?</h2>
-      <p>Un premier échange suffit pour savoir si le terrain est favorable — et si un audit a du sens avant d'aller plus loin.</p>
+      <h2>Un premier échange de 15 minutes, sans rien à vendre.</h2>
+      <p>L'objectif : valider si le terrain est favorable, et si un diagnostic a du sens avant d'aller plus loin.</p>
       <div class="contact-links">
-        <a href="mailto:votre.email@exemple.fr?subject=Audit%20Dataiku%20%2F%20dette%20technique" class="btn btn-primary">votre.email@exemple.fr →</a>
+        <a href="mailto:votre.email@exemple.fr?subject=Diagnostic%20de%20dette%20technique" class="btn btn-primary">votre.email@exemple.fr →</a>
         <a href="https://www.linkedin.com/in/votre-profil" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
@@ -682,7 +568,7 @@
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-    <span class="mono">© <span id="year"></span> — Consultant Dataiku &amp; no-code. EURL.</span>
+    <span class="mono">© <span id="year"></span> Fernando Gonçalves — Consultant en dette technique. EURL.</span>
     <div class="foot-links">
       <a href="#top">Haut de page</a>
       <a href="mailto:votre.email@exemple.fr">Contact</a>
