@@ -3,275 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fernando Gonçalves — Consultant en dette technique</title>
-<meta name="description" content="25 ans à l'intérieur des DSI. J'établis en 15 jours une image claire et chiffrée de votre dette technique — Dataiku, code métier, applications backend, chaînes d'ordonnanceurs — pour que vous puissiez décider.">
+<title>Fernando Gonçalves, consultant en dette technique</title>
+<meta name="description" content="Un diagnostic indépendant de votre existant : ce qui est annoncé, ce qui tourne réellement, ce que l'écart vous coûte. Une image claire et un plan par paliers pour décider.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --indigo:#1b0047;
     --violet:#3d0a53;
     --magenta:#7a0032;
     --crimson:#96002a;
-    --ember:#c8213f;
+    --ember:#e0304f;
     --ink:#0c0118;
-    --ink2:#10021f;
+    --ink2:#140325;
     --paper:#f4eee7;
-    --paper-dim:#c9b9c8;
-    --line: rgba(244,238,231,0.14);
-    --max: 1140px;
+    --dim:#cbbccb;
+    --line:rgba(244,238,231,0.14);
+    --max:1120px;
+    --head:'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+    --body:'Public Sans', 'Segoe UI', system-ui, sans-serif;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{
-    background:var(--ink);
-    color:var(--paper);
-    font-family:'Public Sans', system-ui, sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:600;
-    line-height:1.08;
-    letter-spacing:-0.01em;
-  }
-  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em;}
+  body{background:var(--ink); color:var(--paper); font-family:var(--body); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--head); font-weight:600; line-height:1.1; letter-spacing:-0.015em;}
+  h2{font-size:clamp(28px,3.6vw,42px); max-width:22ch;}
+  h3{font-size:20px;}
+  p{max-width:68ch;}
   a{color:inherit;}
-  img{max-width:100%; display:block;}
   .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
-  section{padding:120px 0;}
-  @media (max-width:720px){ section{padding:76px 0;} }
+  section{padding:112px 0;}
+  @media (max-width:720px){ section{padding:72px 0;} body{font-size:16px;} }
+  .lead{color:var(--dim); font-size:18px; margin-top:18px;}
+  .kicker{color:var(--ember); font-family:var(--head); font-weight:500; font-size:15px; margin-bottom:14px;}
 
-  /* ---------- NAV ---------- */
-  header.nav{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    background:rgba(12,1,24,0.85);
-    backdrop-filter: blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
-  .nav-mark{
-    font-family:'IBM Plex Mono', monospace; font-size:14px; font-weight:600; letter-spacing:0.04em;
-    display:flex; align-items:center; gap:10px; text-decoration:none;
-  }
-  .nav-mark .dot{width:9px; height:9px; border-radius:2px; background:linear-gradient(135deg, var(--ember), var(--indigo)); display:inline-block;}
-  .nav-links{display:flex; gap:30px; font-size:14px;}
-  .nav-links a{text-decoration:none; color:var(--paper-dim); transition:color .15s ease;}
+  /* NAV */
+  header.nav{position:fixed; inset:0 0 auto 0; z-index:50; background:rgba(12,1,24,0.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; gap:20px; padding-top:16px; padding-bottom:16px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-family:var(--head); font-weight:600; font-size:16px;}
+  .brand-mark{display:grid; grid-template-columns:repeat(3,6px); gap:2px;}
+  .brand-mark i{width:6px; height:6px; background:rgba(244,238,231,0.22);}
+  .brand-mark i:nth-child(1),.brand-mark i:nth-child(5),.brand-mark i:nth-child(9){background:var(--ember);}
+  .nav-links{display:flex; gap:28px; font-size:15px;}
+  .nav-links a{text-decoration:none; color:var(--dim);}
   .nav-links a:hover{color:var(--paper);}
-  .nav-cta{
-    font-size:13px; font-family:'IBM Plex Mono',monospace;
-    border:1px solid var(--line); padding:8px 16px; border-radius:2px;
-    text-decoration:none; white-space:nowrap;
-    transition:border-color .15s ease, background .15s ease;
-  }
-  .nav-cta:hover{border-color:var(--ember); background:rgba(200,33,63,0.12);}
-  @media (max-width:800px){ .nav-links{display:none;} }
+  @media (max-width:860px){ .nav-links{display:none;} }
 
-  /* ---------- HERO (fond CSS pur, pas d'image externe) ---------- */
-  .hero{
-    position:relative; padding-top:196px; padding-bottom:100px;
-    overflow:hidden; border-bottom:1px solid var(--line);
-    background:
-      linear-gradient(115deg, var(--indigo) 0%, var(--violet) 32%, var(--magenta) 60%, var(--crimson) 100%);
-  }
-  .hero::before{
-    /* grille façon "matrice de dataframe" : le motif d'origine du logo */
-    content:"";
-    position:absolute; inset:0;
-    background-image:
-      repeating-linear-gradient(90deg, rgba(244,238,231,0.05) 0 1px, transparent 1px 130px),
-      repeating-linear-gradient(0deg, rgba(244,238,231,0.05) 0 1px, transparent 1px 130px);
-    opacity:0.6;
-  }
-  .hero::after{
-    content:"";
-    position:absolute; inset:0;
-    background: radial-gradient(ellipse 900px 560px at 8% -10%, rgba(12,1,24,0.55), transparent 60%),
-                linear-gradient(180deg, transparent 40%, var(--ink) 100%);
-  }
-  .hero-inner{position:relative; z-index:2;}
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--paper-dim); display:flex; align-items:center; gap:10px; margin-bottom:26px;
-  }
-  .eyebrow::before{content:""; width:22px; height:1px; background:var(--ember); display:inline-block;}
-  .hero h1{font-size:clamp(30px, 4.6vw, 52px); max-width:900px; color:var(--paper);}
-  .hero h1 em{
-    font-style:normal;
-    background:linear-gradient(90deg, #ffe1c2, #ff5470 60%, #ffe1c2);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero .sub{margin-top:24px; max-width:660px; font-size:18px; color:var(--paper-dim);}
-  .hero-cta{margin-top:40px; display:flex; gap:16px; flex-wrap:wrap;}
-  .btn{
-    font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:14px 24px; border-radius:2px;
-    text-decoration:none; display:inline-flex; align-items:center; gap:10px;
-    transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    border:1px solid transparent;
-  }
-  .btn-primary{background:linear-gradient(90deg, var(--crimson), var(--ember)); color:var(--paper);}
-  .btn-primary:hover{transform:translateY(-1px);}
-  .btn-ghost{border-color:rgba(244,238,231,0.4); color:var(--paper);}
+  .btn{display:inline-flex; align-items:center; font-family:var(--head); font-weight:500; font-size:15.5px; padding:13px 22px; border-radius:3px; text-decoration:none; border:1px solid transparent; transition:background .15s ease, border-color .15s ease;}
+  .btn-primary{background:var(--paper); color:var(--ink);}
+  .btn-primary:hover{background:#fff;}
+  .btn-ghost{border-color:rgba(244,238,231,0.4);}
   .btn-ghost:hover{border-color:var(--paper);}
+  .btn-small{padding:8px 16px; font-size:14px;}
 
-  .hero-meta{margin-top:60px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(244,238,231,0.18); border:1px solid rgba(244,238,231,0.18);}
-  .hero-meta div{background:rgba(12,1,24,0.55); padding:20px 22px; backdrop-filter:blur(2px);}
-  .hero-meta .num{font-family:'Space Grotesk',sans-serif; font-size:25px; font-weight:600;}
-  .hero-meta .lbl{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--paper-dim); margin-top:6px; letter-spacing:0.03em;}
-  @media (max-width:640px){ .hero-meta{grid-template-columns:1fr;} }
+  /* HERO */
+  .hero{position:relative; padding:170px 0 110px; background:linear-gradient(118deg, var(--indigo) 0%, var(--violet) 38%, var(--magenta) 72%, var(--crimson) 100%); overflow:hidden;}
+  .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 55%, var(--ink) 100%); pointer-events:none;}
+  .hero-grid{position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:64px; align-items:center;}
+  @media (max-width:940px){ .hero-grid{grid-template-columns:1fr; gap:56px;} }
+  .hero h1{font-size:clamp(38px,5.4vw,66px); max-width:17ch;}
+  .hero .lead{color:#e6d8e2; font-size:19px; max-width:52ch; margin-top:26px;}
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap; margin-top:38px;}
 
-  /* ---------- SECTION HEADS ---------- */
-  .s-head{max-width:700px; margin-bottom:56px;}
-  .s-head .eyebrow{margin-bottom:18px;}
-  .s-head h2{font-size:clamp(26px,3.4vw,38px);}
-  .s-head p{margin-top:18px; color:var(--paper-dim); font-size:16.5px;}
-
-  /* ---------- CERVEAU REPTILIEN ---------- */
-  .trauma{background:var(--ink2); border-bottom:1px solid var(--line);}
-  .trauma-layout{display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center;}
-  @media (max-width:900px){ .trauma-layout{grid-template-columns:1fr; gap:44px;} }
-  .trauma-text p{color:var(--paper-dim); font-size:16.5px; margin-bottom:16px; max-width:540px;}
-  .trauma-text .quote{
-    margin-top:24px; padding-left:20px; border-left:2px solid var(--ember);
-    font-family:'Space Grotesk',sans-serif; font-size:18px; color:var(--paper);
+  /* LA DIAGONALE — élément signature */
+  .matrix{background:rgba(12,1,24,0.55); border:1px solid rgba(244,238,231,0.2); padding:26px 26px 22px;}
+  .mx-title{font-family:var(--head); font-size:16px; line-height:1.3; margin-bottom:14px;}
+  .mx{display:grid; grid-template-columns:104px repeat(5,1fr); gap:4px; align-items:center;}
+  .mx .rl{font-size:12.5px; color:var(--paper); line-height:1.2;}
+  .mx .c{aspect-ratio:1; background:rgba(244,238,231,0.05); position:relative;}
+  .mx .d{background:rgba(244,238,231,0.14); outline:1px solid rgba(244,238,231,0.6); outline-offset:-1px;}
+  .mx .hit{background:var(--paper);}
+  .mx-dir{display:flex; justify-content:space-between; margin:10px 0 0 108px; font-size:12.5px; color:var(--dim);}
+  .mx-cap{margin-top:16px; font-size:14px; color:var(--dim); line-height:1.5;}
+  .mx-cap strong{color:var(--paper); font-weight:500;}
+  @media (prefers-reduced-motion:no-preference){
+    .mx .hit{animation:light .5s ease both; animation-delay:calc(var(--i,0) * 150ms + 300ms);}
+    @keyframes light{from{background:rgba(244,238,231,0.05);} to{background:var(--paper);}}
   }
-  .brain-diagram{position:relative; display:flex; align-items:center; justify-content:center;}
-  .brain-svg{width:100%; max-width:420px;}
-  .brain-ring{fill:none; stroke-width:1.4;}
-  .brain-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; fill:var(--paper-dim); letter-spacing:0.04em;}
-  .brain-core{font-family:'Space Grotesk',sans-serif; font-size:14px; fill:var(--paper); font-weight:600;}
+  @media (max-width:420px){ .mx{grid-template-columns:92px repeat(5,1fr);} .mx .rl{font-size:11.5px;} .mx-dir{margin-left:96px; font-size:11.5px;} .matrix{padding:20px 16px 18px;} }
 
-  /* ---------- METHODE ---------- */
-  .method-steps{display:flex; flex-direction:column;}
-  .m-step{display:grid; grid-template-columns:64px 1fr; gap:28px; padding:30px 0; border-top:1px solid var(--line);}
-  .m-step:last-child{border-bottom:1px solid var(--line);}
-  .m-step .m-num{
-    font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:600; color:var(--ember);
-    display:flex; align-items:flex-start; padding-top:2px;
-  }
-  .m-step h3{font-size:19px; margin-bottom:8px; font-weight:600;}
-  .m-step p{color:var(--paper-dim); font-size:15.5px; max-width:640px;}
-  .method-name{
-    display:inline-block; margin-top:6px; padding:5px 12px;
-    border:1px solid rgba(200,33,63,0.4); border-radius:2px;
-    font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ember);
-  }
-  @media (max-width:600px){ .m-step{grid-template-columns:1fr; gap:8px;} }
+  /* SYMPTOMES */
+  .symptoms{display:grid; grid-template-columns:repeat(2,1fr); gap:0 56px; margin-top:52px; list-style:none;}
+  @media (max-width:760px){ .symptoms{grid-template-columns:1fr;} }
+  .symptoms li{padding:22px 0 22px 30px; border-top:1px solid var(--line); position:relative; color:var(--dim);}
+  .symptoms li::before{content:""; position:absolute; left:0; top:31px; width:12px; height:12px; border:1.5px solid var(--ember);}
+  .symptoms li strong{display:block; color:var(--paper); font-family:var(--head); font-weight:500; font-size:19px; margin-bottom:4px;}
+  .aside-note{margin-top:44px; font-family:var(--head); font-size:clamp(20px,2.2vw,25px); max-width:34ch; line-height:1.35;}
 
-  /* ---------- ECOSYSTEMES ---------- */
-  .eco{background:var(--ink2); border-bottom:1px solid var(--line);}
-  .eco-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  @media (max-width:880px){ .eco-grid{grid-template-columns:1fr 1fr;} }
-  @media (max-width:560px){ .eco-grid{grid-template-columns:1fr;} }
-  .eco-cell{background:var(--ink); padding:30px 26px;}
-  .eco-cell .e-tag{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ember); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:10px;}
-  .eco-cell h3{font-size:17px; margin-bottom:8px; font-weight:600;}
-  .eco-cell p{font-size:14.5px; color:var(--paper-dim);}
+  /* TABOU */
+  .tabou{background:var(--ink2);}
+  .tabou-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px;}
+  @media (max-width:880px){ .tabou-grid{grid-template-columns:1fr; gap:28px;} }
+  .tabou p{color:var(--dim); margin-bottom:18px;}
+  .tabou blockquote{margin-top:28px; padding-left:22px; border-left:2px solid var(--ember); font-family:var(--head); font-size:20px; line-height:1.45; color:var(--paper); max-width:48ch;}
 
-  /* ---------- OFFRE ---------- */
-  .offer{
-    border:1px solid rgba(200,33,63,0.35); border-radius:4px; padding:48px;
-    background:linear-gradient(160deg, rgba(122,0,50,0.16), rgba(27,0,71,0.3));
-  }
-  @media (max-width:680px){ .offer{padding:28px;} }
-  .offer-tag{font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ember); margin-bottom:16px; display:block;}
-  .offer h3{font-size:27px; margin-bottom:14px;}
-  .offer > p.lead{color:var(--paper-dim); max-width:640px; margin-bottom:36px; font-size:16px;}
-  .tiers{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(244,238,231,0.14); border:1px solid rgba(244,238,231,0.14); border-radius:3px; overflow:hidden; margin-bottom:34px;}
-  @media (max-width:680px){ .tiers{grid-template-columns:1fr;} }
-  .tier{background:rgba(12,1,24,0.55); padding:26px 24px;}
-  .tier .t-label{font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--paper-dim); margin-bottom:10px;}
-  .tier .t-price{font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:600; margin-bottom:10px;}
-  .tier .t-price span{font-size:14px; color:var(--paper-dim); font-weight:400;}
-  .tier p{font-size:14px; color:var(--paper-dim);}
-  .offer-note{font-size:14px; color:var(--paper-dim); border-top:1px solid rgba(244,238,231,0.14); padding-top:22px; margin-bottom:30px;}
-  .offer-foot{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;}
+  /* CINQ QUESTIONS */
+  .questions{margin-top:52px; border-bottom:1px solid var(--line);}
+  .q{display:grid; grid-template-columns:200px 1fr 0.8fr; gap:32px; padding:28px 0; border-top:1px solid var(--line); align-items:baseline;}
+  @media (max-width:900px){ .q{grid-template-columns:1fr; gap:6px; padding:24px 0;} }
+  .q .axis{font-family:var(--head); font-weight:500; color:var(--ember); font-size:17px;}
+  .q h3{font-size:clamp(20px,2vw,24px); font-weight:500; line-height:1.3;}
+  .q p{color:var(--dim); font-size:15.5px;}
 
-  /* ---------- CASES ---------- */
-  .cases{border-bottom:1px solid var(--line);}
-  .case-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  @media (max-width:880px){ .case-grid{grid-template-columns:1fr;} }
-  .case{background:var(--ink2); padding:34px 30px; display:flex; flex-direction:column; gap:14px;}
-  .case .c-tag{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--paper-dim); text-transform:uppercase; letter-spacing:0.08em;}
-  .case h3{font-size:18px; font-weight:600;}
-  .case p{font-size:14.5px; color:var(--paper-dim);}
-  .case .c-result{margin-top:auto; padding-top:14px; border-top:1px solid var(--line); font-size:13.5px; color:var(--paper); font-family:'IBM Plex Mono',monospace;}
+  /* LIVRABLES */
+  .deliver{display:grid; grid-template-columns:repeat(4,1fr); margin-top:56px; border-top:1px solid var(--line);}
+  @media (max-width:900px){ .deliver{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .deliver{grid-template-columns:1fr;} }
+  .deliver div{padding:28px 28px 28px 0;}
+  .deliver h3{font-size:19px; margin-bottom:10px;}
+  .deliver p{color:var(--dim); font-size:15.5px;}
+  .after{margin-top:48px; padding:34px 36px; background:rgba(244,238,231,0.04); border:1px solid var(--line); display:grid; grid-template-columns:220px 1fr; gap:32px;}
+  @media (max-width:760px){ .after{grid-template-columns:1fr; gap:12px; padding:26px;} }
+  .after h3{font-size:22px;}
+  .after p{color:var(--dim); margin-bottom:12px;}
+  .after p:last-child{margin-bottom:0;}
 
-  /* ---------- ICP ---------- */
-  .persona{
-    display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center;
-    border:1px solid var(--line); border-radius:4px; padding:44px; margin-bottom:40px;
-    background:rgba(244,238,231,0.03);
-  }
-  @media (max-width:880px){ .persona{grid-template-columns:1fr; gap:28px; padding:28px;} }
-  .persona-badge{
-    font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.08em;
-    color:var(--ember); margin-bottom:14px;
-  }
-  .persona h3{font-size:24px; margin-bottom:14px;}
-  .persona p{color:var(--paper-dim); font-size:15.5px;}
-  .persona-visual{
-    aspect-ratio:1/1; border-radius:4px;
-    background:linear-gradient(135deg, var(--magenta), var(--indigo));
-    display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;
-    border:1px solid rgba(244,238,231,0.14);
-  }
-  .persona-visual .pv-inner{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--paper);}
-  .persona-visual .pv-inner .big{display:block; font-family:'Space Grotesk',sans-serif; font-size:30px; font-weight:600; margin-bottom:10px;}
+  /* METHODE */
+  .method{background:var(--ink2);}
+  .steps{list-style:none; margin-top:56px; display:grid; grid-template-columns:repeat(5,1fr); gap:24px; counter-reset:s;}
+  @media (max-width:980px){ .steps{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .steps{grid-template-columns:1fr;} }
+  .steps li{counter-increment:s; border-top:2px solid var(--ember); padding-top:18px;}
+  .steps li::before{content:counter(s); font-family:var(--head); font-size:15px; color:var(--ember); display:block; margin-bottom:10px;}
+  .steps h3{font-size:18px; margin-bottom:8px;}
+  .steps p{color:var(--dim); font-size:15px;}
 
-  .icp-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden;}
-  @media (max-width:720px){ .icp-grid{grid-template-columns:1fr;} }
-  .icp-col{background:var(--ink); padding:34px;}
-  .icp-col.green{background:linear-gradient(180deg, rgba(244,238,231,0.05), transparent);}
-  .icp-col.red{background:linear-gradient(180deg, rgba(150,0,42,0.14), transparent);}
-  .icp-col h4{font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:10px;}
-  .icp-col h4 .sq{width:9px; height:9px; border-radius:2px; display:inline-block;}
-  .icp-col.green h4 .sq{background:var(--paper-dim);}
-  .icp-col.red h4 .sq{background:var(--ember);}
-  .icp-col ul{list-style:none;}
-  .icp-col li{font-size:14.5px; color:var(--paper-dim); padding:13px 0; border-top:1px solid var(--line);}
-  .icp-col li:first-of-type{border-top:none;}
+  /* OFFRE */
+  .offers{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:56px;}
+  @media (max-width:820px){ .offers{grid-template-columns:1fr;} }
+  .offer{border:1px solid var(--line); padding:36px; display:flex; flex-direction:column;}
+  .offer.main{border-color:rgba(224,48,79,0.55); background:linear-gradient(160deg, rgba(122,0,50,0.22), rgba(27,0,71,0.3));}
+  .offer .for{color:var(--dim); font-size:15px; margin-bottom:6px;}
+  .offer h3{font-size:25px;}
+  .price{font-family:var(--head); font-size:34px; font-weight:600; margin:22px 0 4px;}
+  .price small{font-size:15px; font-weight:400; color:var(--dim);}
+  .offer .delay{color:var(--dim); font-size:15px; margin-bottom:22px;}
+  .offer ul{list-style:none; margin-bottom:30px;}
+  .offer li{padding:10px 0; border-top:1px solid var(--line); font-size:15.5px; color:var(--dim);}
+  .offer .btn{margin-top:auto; align-self:flex-start;}
+  .offer-note{margin-top:32px; color:var(--dim); font-size:15.5px;}
+  .terrains{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; list-style:none;}
+  .terrains li{border:1px solid var(--line); padding:7px 14px; font-size:14.5px; border-radius:40px;}
 
-  /* ---------- ABOUT ---------- */
-  .about{background:var(--ink2); border-bottom:1px solid var(--line);}
-  .about-layout{display:grid; grid-template-columns:0.8fr 1.2fr; gap:64px;}
-  @media (max-width:880px){ .about-layout{grid-template-columns:1fr; gap:36px;} }
-  .about-layout p{color:var(--paper-dim); font-size:16.5px; margin-bottom:18px;}
-  .about-layout p strong{color:var(--paper); font-weight:600;}
+  /* POUR QUI */
+  .who{display:grid; grid-template-columns:1fr 1fr 1fr; gap:40px; margin-top:56px;}
+  @media (max-width:900px){ .who{grid-template-columns:1fr;} }
+  .who h3{margin-bottom:12px;}
+  .who p, .who li{color:var(--dim); font-size:15.5px;}
+  .who .not{border-left:1px solid var(--line); padding-left:40px;}
+  @media (max-width:900px){ .who .not{border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:32px;} }
+  .who .not ul{list-style:none;}
+  .who .not li{padding:8px 0;}
 
-  /* ---------- CONTACT ---------- */
-  .contact{background:linear-gradient(160deg, var(--indigo), var(--ink) 60%); text-align:center;}
-  .contact h2{font-size:clamp(28px,4vw,44px); max-width:780px; margin:0 auto 20px;}
-  .contact p{color:var(--paper-dim); max-width:540px; margin:0 auto 38px; font-size:16.5px;}
-  .contact-links{display:flex; justify-content:center; gap:18px; flex-wrap:wrap;}
+  /* A PROPOS */
+  .about{background:var(--ink2);}
+  .about-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px;}
+  @media (max-width:880px){ .about-grid{grid-template-columns:1fr; gap:28px;} }
+  .about p{color:var(--dim); margin-bottom:18px;}
+  .about p strong{color:var(--paper); font-weight:500;}
+  .seen{margin-top:40px;}
+  .seen h3{font-size:18px; margin-bottom:6px;}
+  .seen article{padding:22px 0; border-top:1px solid var(--line);}
+  .seen .ctx{font-size:14px; color:var(--ember); margin-bottom:6px;}
+  .seen p{margin-bottom:0; font-size:15.5px;}
 
-  footer{padding:36px 0; border-top:1px solid var(--line);}
-  footer .mono{font-size:12.5px; color:var(--paper-dim);}
-  footer .foot-links{display:flex; gap:22px;}
-  footer .foot-links a{font-size:12.5px; color:var(--paper-dim); text-decoration:none;}
-  footer .foot-links a:hover{color:var(--paper);}
+  /* FAQ */
+  .faq{margin-top:48px; max-width:820px;}
+  .faq details{border-top:1px solid var(--line);}
+  .faq details:last-child{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer; list-style:none; padding:22px 40px 22px 0; font-family:var(--head); font-size:19px; font-weight:500; position:relative;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+"; position:absolute; right:4px; top:18px; font-size:24px; color:var(--ember); transition:transform .2s ease;}
+  .faq details[open] summary::after{transform:rotate(45deg);}
+  .faq details p{color:var(--dim); padding:0 0 24px;}
+
+  /* CONTACT */
+  .contact{background:linear-gradient(150deg, var(--indigo), var(--ink) 65%); text-align:center;}
+  .contact h2{margin:0 auto; max-width:20ch;}
+  .contact .lead{margin:20px auto 0; max-width:52ch;}
+  .contact-links{display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:38px;}
+
+  footer{padding:40px 0; border-top:1px solid var(--line); font-size:14px; color:var(--dim);}
+  .foot{display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;}
+  footer summary{cursor:pointer;}
+  footer details p{margin-top:12px; max-width:none; line-height:1.7;}
 
   ::selection{background:var(--ember); color:var(--paper);}
   :focus-visible{outline:2px solid var(--ember); outline-offset:3px;}
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{transition:none !important;} }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *{transition:none !important; animation:none !important;} }
 </style>
 </head>
 <body>
 
 <header class="nav">
   <div class="wrap">
-    <a href="#top" class="nav-mark"><span class="dot"></span>F. GONÇALVES — DETTE&nbsp;TECHNIQUE</a>
-    <nav class="nav-links">
+    <a href="#top" class="brand" aria-label="Fernando Gonçalves, retour en haut">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      Fernando Gonçalves
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#probleme">Le problème</a>
+      <a href="#questions">Cinq questions</a>
       <a href="#methode">Méthode</a>
-      <a href="#ecosystemes">Écosystèmes</a>
-      <a href="#offre">Diagnostic</a>
-      <a href="#pour-qui">Pour qui</a>
-      <a href="#cas">Cas vécus</a>
+      <a href="#offre">Offre</a>
+      <a href="#a-propos">À propos</a>
     </nav>
-    <a href="#contact" class="nav-cta">Demander un diagnostic</a>
+    <a href="#contact" class="btn btn-ghost btn-small">Échanger 15 minutes</a>
   </div>
 </header>
 
@@ -279,274 +217,273 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-inner wrap">
-      <div class="eyebrow">Consultant indépendant — dette technique, tous écosystèmes</div>
-      <h1>Votre dette technique a un nom que personne dans votre organisation ne veut prononcer. <em>Moi, je le prononce — et j'y mets un chiffre.</em></h1>
-      <p class="sub">25 ans à l'intérieur des DSI, à voir ce qui merde avant que ça merde. En 15 jours, je vous rends une image claire et chiffrée de votre existant — Dataiku et plateformes low-code, code métier caché, applications backend, processus inter-applicatifs, chaînes d'ordonnanceurs — pour que vous puissiez décider en connaissance de cause.</p>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Demander un diagnostic →</a>
-        <a href="#methode" class="btn btn-ghost">Voir la méthode</a>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker" style="color:#ffc2cc;">Consultant en dette technique</p>
+        <h1>Votre existant tient. Savez-vous à quel prix&nbsp;?</h1>
+        <p class="lead">Je pose un diagnostic indépendant de votre système d'information : ce qui est annoncé, ce qui tourne réellement, et ce que l'écart vous coûte. Vous repartez avec une image claire et un plan par paliers pour décider.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Échanger 15 minutes</a>
+          <a href="#methode" class="btn btn-ghost">Voir la méthode</a>
+        </div>
       </div>
-      <div class="hero-meta">
-        <div>
-          <div class="num">25 ans</div>
-          <div class="lbl">à l'intérieur des DSI, tous secteurs</div>
+
+      <figure class="matrix" aria-label="Exemple : le low-code, l'automatisation et la capitalisation sont surestimés, la maintenance est sous-estimée, seules les règles métier sont évaluées justement">
+        <p class="mx-title">La diagonale, appliquée aux cinq questions (exemple)</p>
+        <div class="mx" aria-hidden="true">
+          <span class="rl">Low-code</span><span class="c d"></span><span class="c"></span><span class="c"></span><span class="c hit" style="--i:0"></span><span class="c"></span>
+          <span class="rl">Automatisation</span><span class="c"></span><span class="c d"></span><span class="c"></span><span class="c hit" style="--i:1"></span><span class="c"></span>
+          <span class="rl">Règles métier</span><span class="c"></span><span class="c"></span><span class="c d hit" style="--i:2"></span><span class="c"></span><span class="c"></span>
+          <span class="rl">Capitalisation</span><span class="c"></span><span class="c"></span><span class="c"></span><span class="c d"></span><span class="c hit" style="--i:3"></span>
+          <span class="rl">Maintenance</span><span class="c"></span><span class="c hit" style="--i:4"></span><span class="c"></span><span class="c"></span><span class="c d"></span>
         </div>
-        <div>
-          <div class="num">3 - 15 jours</div>
-          <div class="lbl">pour une vision claire et chiffrée de l'existant</div>
+        <div class="mx-dir" aria-hidden="true"><span>← sous-estimé</span><span>surestimé →</span></div>
+        <figcaption class="mx-cap"><strong>Sur la diagonale</strong>, le sujet est évalué justement. À droite, il est surestimé ; à gauche, sous-estimé. <strong>Plus la case claire s'éloigne de la diagonale, plus la dette est lourde.</strong></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PROBLEME -->
+  <section id="probleme">
+    <div class="wrap">
+      <p class="kicker">Le problème</p>
+      <h2>Vous reconnaissez peut-être la situation.</h2>
+      <ul class="symptoms">
+        <li><strong>Chaque mise en production ressemble à un pari.</strong>On multiplie les précautions, on retarde, et on croise les doigts le jour J.</li>
+        <li><strong>Personne ne sait rejouer un traitement passé.</strong>Un chiffre change d'un mois sur l'autre, et on ne peut pas expliquer pourquoi.</li>
+        <li><strong>Le low-code promis est devenu du code caché.</strong>L'outil sert à héberger des scripts que personne ne relit ni ne teste.</li>
+        <li><strong>Les correctifs s'empilent.</strong>Chacun règle un cas particulier, et l'ensemble devient impossible à faire évoluer.</li>
+        <li><strong>Vous venez d'arriver et devez décider vite.</strong>On vous assure que tout fonctionne, mais personne ne peut le démontrer.</li>
+        <li><strong>Le budget part dans l'entretien.</strong>Maintenir l'existant coûte chaque année un peu plus, sans que ce coût apparaisse nulle part.</li>
+      </ul>
+      <p class="aside-note">Ce n'est pas une question de compétence de vos équipes. C'est une dette qui n'a jamais été nommée, donc jamais chiffrée.</p>
+    </div>
+  </section>
+
+  <!-- TABOU -->
+  <section class="tabou">
+    <div class="wrap tabou-grid">
+      <div>
+        <p class="kicker">Pourquoi le sujet reste bloqué</p>
+        <h2>Une organisation se souvient de ses échecs.</h2>
+      </div>
+      <div>
+        <p>Une mise en production qui casse une chaîne métier, un projet qui échoue devant la direction : le choc marque durablement. Ensuite, on ajoute des protections, on contourne, on évite le sujet. Rarement par mauvaise foi, plutôt par réflexe de protection.</p>
+        <p>Nommer la dette reviendrait à rouvrir cette blessure, et à demander un budget qui ne rentre dans aucune case. Alors elle grossit en silence, souvent derrière un vocabulaire rassurant.</p>
+        <blockquote>Un regard extérieur permet de poser les faits sans chercher de coupable, avec des chiffres et un plan que la direction peut entendre.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CINQ QUESTIONS -->
+  <section id="questions">
+    <div class="wrap">
+      <p class="kicker">Ce que le diagnostic examine</p>
+      <h2>Cinq questions, posées à votre existant.</h2>
+      <p class="lead">Pour chacune, je compare le niveau que l'organisation annonce et le niveau que je mesure. L'écart entre les deux, c'est votre dette.</p>
+      <div class="questions">
+        <div class="q">
+          <p class="axis">Low-code</p>
+          <h3>Le low-code tient-il sa promesse, ou cache-t-il du code&nbsp;?</h3>
+          <p>La part réelle de code dans les flux, qui le maintient, avec quelles garanties.</p>
         </div>
-        <div>
-          <div class="num">1 livrable</div>
-          <div class="lbl">une décision, pas un rapport de plus</div>
+        <div class="q">
+          <p class="axis">Maintenance</p>
+          <h3>Le SI est-il réellement maintenu, maintenable, et à quel coût&nbsp;?</h3>
+          <p>Les zones d'ombre, la dépendance à quelques personnes, le coût annuel de l'entretien.</p>
+        </div>
+        <div class="q">
+          <p class="axis">Automatisation</p>
+          <h3>Ce qui est dit automatisé l'est-il vraiment&nbsp;?</h3>
+          <p>Les interventions humaines, les exécutions à la main, les relances en urgence.</p>
+        </div>
+        <div class="q">
+          <p class="axis">Règles métier</p>
+          <h3>Sont-elles documentées, accessibles, faciles à faire évoluer&nbsp;?</h3>
+          <p>Où elles vivent réellement, et ce que coûte une modification.</p>
+        </div>
+        <div class="q">
+          <p class="axis">Capitalisation</p>
+          <h3>Peut-on construire sur l'existant sans le casser&nbsp;?</h3>
+          <p>La modularité, la réutilisation, l'effet d'une évolution sur le reste.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LE CERVEAU REPTILIEN DE L'ENTREPRISE -->
-  <section class="trauma">
-    <div class="wrap trauma-layout">
-      <div class="trauma-text">
-        <div class="eyebrow">Pourquoi ça bloque</div>
-        <h2 style="font-size:clamp(24px,3vw,34px); margin-bottom:20px;">Une entreprise a, elle aussi, un cerveau reptilien.</h2>
-        <p>Une mise en production qui casse tout, un projet à mille flux qui explose en plein vol : le choc remonte jusqu'à la direction, et à partir de là, plus personne ne veut en entendre parler. On met ceinture, bretelles, on scotche. Le sujet devient tabou — pas par mauvaise foi, par réflexe de survie organisationnel.</p>
-        <p>Résultat : une masse de rustines qu'on ne peut plus bouger, un empilement de cas particuliers que le génie logiciel sait résoudre depuis quarante ans — mais que personne, en interne, n'a le mandat politique de nommer.</p>
-        <div class="quote">Je ne viens pas raviver ce traumatisme. Je viens avec un chiffre, un tiers neutre, et un plan par paliers — la seule façon de faire remonter l'information sans déclencher la panique.</div>
+  <!-- LIVRABLE -->
+  <section id="livrable" style="background:var(--ink2);">
+    <div class="wrap">
+      <p class="kicker">Ce que vous obtenez</p>
+      <h2>Une image claire, pas un rapport de plus.</h2>
+      <p class="lead">Le diagnostic est conçu pour ceux qui décident et financent. Il se termine toujours par une restitution orale.</p>
+      <div class="deliver">
+        <div>
+          <h3>L'existant réel</h3>
+          <p>Ce qui tourne vraiment, où se cache le code, quelles dépendances ne sont écrites nulle part.</p>
+        </div>
+        <div>
+          <h3>Les risques</h3>
+          <p>Pour chaque traitement critique : peut-on le rejouer, le faire évoluer, le livrer sans casse&nbsp;?</p>
+        </div>
+        <div>
+          <h3>Un chiffrage</h3>
+          <p>Ce que la dette vous coûte et vous coûtera, exprimé en langage budgétaire.</p>
+        </div>
+        <div>
+          <h3>Un plan par paliers</h3>
+          <p>Des actions ordonnées par risque et par gain, sans tout arrêter.</p>
+        </div>
       </div>
-      <div class="brain-diagram">
-        <svg class="brain-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-          <circle class="brain-ring" cx="200" cy="200" r="170" stroke="rgba(244,238,231,0.14)"/>
-          <circle class="brain-ring" cx="200" cy="200" r="120" stroke="rgba(244,238,231,0.20)"/>
-          <circle cx="200" cy="200" r="70" fill="url(#g1)"/>
-          <defs>
-            <radialGradient id="g1" cx="35%" cy="30%" r="75%">
-              <stop offset="0%" stop-color="#ff5470"/>
-              <stop offset="100%" stop-color="#7a0032"/>
-            </radialGradient>
-          </defs>
-          <text x="200" y="204" text-anchor="middle" class="brain-core">Le choc</text>
-          <text x="200" y="52" text-anchor="middle" class="brain-label">RUSTINE SUR RUSTINE</text>
-          <text x="200" y="352" text-anchor="middle" class="brain-label">DETTE JAMAIS NOMMÉE</text>
-          <text x="30" y="204" text-anchor="middle" class="brain-label" transform="rotate(-90 30 204)">SILENCE ORGANISATIONNEL</text>
-          <text x="372" y="204" text-anchor="middle" class="brain-label" transform="rotate(90 372 204)">PEUR DE REJOUER L'ÉCHEC</text>
-        </svg>
+
+      <div class="after">
+        <h3>Et après&nbsp;?</h3>
+        <div>
+          <p>Le plan conclut parfois qu'il vaut mieux reconstruire une partie plutôt que continuer à la rapiécer. Le diagnostic donne alors les éléments pour l'assumer, chiffres à l'appui.</p>
+          <p>Le livrable vous appartient : vos équipes ou votre prestataire peuvent le mettre en œuvre. Si vous manquez de ressources, je peux piloter la mise en œuvre avec des profils de confiance. Ce n'est jamais une condition.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- METHODE -->
-  <section id="methode">
+  <section class="method" id="methode" style="background:var(--ink);">
     <div class="wrap">
-      <div class="s-head">
-        <div class="eyebrow">Méthodologie</div>
-        <h2>La Méthode de la Diagonale</h2>
-        <p>Le nom vient d'une matrice de confusion : sur la diagonale, ce qui est annoncé correspond à ce qui est réel. En dehors, c'est le point aveugle. Ma méthode consiste à ramener votre organisation sur cette diagonale — étape par étape, sans brutalité.</p>
-      </div>
-      <div class="method-steps">
-        <div class="m-step">
-          <div class="m-num">01</div>
-          <div>
-            <h3>Cartographie du terrain déclaré</h3>
-            <p>Inventaire de ce que l'organisation présente comme son existant : flux Dataiku ou plateforme low-code, applications backend, processus inter-services, chaînes d'ordonnanceurs. Entretiens ciblés — pas seulement la documentation, qui ment presque toujours par omission.</p>
-          </div>
-        </div>
-        <div class="m-step">
-          <div class="m-num">02</div>
-          <div>
-            <h3>Vérification empirique — remplir la diagonale</h3>
-            <p>Je ne me fie jamais à une déclaration de statut. Je teste la reproductibilité (peut-on rejouer un mois, une version passée ?), je trace les dépendances réelles, je débusque le code caché derrière l'outil low-code, je vérifie ce qui tourne vraiment en production plutôt qu'en développement.</p>
-          </div>
-        </div>
-        <div class="m-step">
-          <div class="m-num">03</div>
-          <div>
-            <h3>Score de dette et traduction budgétaire</h3>
-            <p>Chaque écart entre l'annoncé et le réel est noté par flux critique, puis traduit en langage financier — celui qui permet à un sponsor de débloquer un budget sans avoir à dire publiquement « on s'est trompés ».</p>
-          </div>
-        </div>
-        <div class="m-step">
-          <div class="m-num">04</div>
-          <div>
-            <h3>Plan de stabilisation par paliers</h3>
-            <p>Jamais une refonte totale — invendable, et rarement nécessaire. Des paliers actionnables, ordonnés par risque et par gain, que vos équipes ou les miennes peuvent exécuter sans tout arrêter.</p>
-          </div>
-        </div>
-        <div class="m-step">
-          <div class="m-num">05</div>
-          <div>
-            <h3>Restitution décisionnelle</h3>
-            <p>Un livrable pensé pour un CODIR ou une direction générale : une image claire de la situation, pas un rapport technique de plus dans un tiroir.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ECOSYSTEMES -->
-  <section class="eco" id="ecosystemes">
-    <div class="wrap">
-      <div class="s-head">
-        <div class="eyebrow">Terrain d'intervention</div>
-        <h2>La dette technique ne se limite pas à un outil.</h2>
-        <p>Le sujet est le même partout : l'écart entre ce qui est annoncé et ce qui tourne réellement. Seul le terrain change.</p>
-      </div>
-      <div class="eco-grid">
-        <div class="eco-cell">
-          <div class="e-tag">Low-code / no-code</div>
-          <h3>Dataiku &amp; plateformes équivalentes</h3>
-          <p>Distinguer ce qui est vraiment low-code de ce qui est du Python pur embarqué dans l'outil par des utilisateurs qui refusent de l'apprendre.</p>
-        </div>
-        <div class="eco-cell">
-          <div class="e-tag">Code métier</div>
-          <h3>Scripts et applicatifs cachés</h3>
-          <p>Le code que personne ne revendique officiellement — développé sur le côté, sans revue, sans tests, mais dont un process critique dépend chaque mois.</p>
-        </div>
-        <div class="eco-cell">
-          <div class="e-tag">Legacy</div>
-          <h3>Applications backend</h3>
-          <p>Bases mal normées, structures imposées par une IHM d'un autre temps, requêtes devenues quasi impossibles — le socle qu'on n'ose plus toucher.</p>
-        </div>
-        <div class="eco-cell">
-          <div class="e-tag">Ordonnancement</div>
-          <h3>Chaînes de traitements batch</h3>
-          <p>Ordonnanceurs, tâches planifiées, dépendances amont non documentées — le traitement annuel que plus personne ne sait vraiment rejouer.</p>
-        </div>
-        <div class="eco-cell">
-          <div class="e-tag">Organisation</div>
-          <h3>Processus inter-applicatifs</h3>
-          <p>Le point où la responsabilité se dilue entre équipes, où chacun présume que « ça, c'est géré par l'autre service ».</p>
-        </div>
-        <div class="eco-cell">
-          <div class="e-tag">Gouvernance</div>
-          <h3>Vocabulaire et reporting</h3>
-          <p>« Run », « amélioration continue », « agilité » : le système de reporting lui-même, souvent construit pour euphémiser plutôt que pour informer.</p>
-        </div>
-      </div>
+      <p class="kicker">La méthode de la Diagonale</p>
+      <h2>Ramener l'annoncé et le réel sur la même ligne.</h2>
+      <p class="lead">Le nom vient de la matrice de confusion : sur la diagonale, la prévision correspond à la réalité. La méthode consiste à mesurer tout ce qui s'en écarte, puis à le réduire progressivement.</p>
+      <ol class="steps">
+        <li><h3>Recenser l'annoncé</h3><p>Ce que l'organisation présente comme son existant, à travers la documentation et des entretiens ciblés.</p></li>
+        <li><h3>Vérifier le réel</h3><p>Tester la reproductibilité, tracer les dépendances, regarder ce qui tourne réellement en production.</p></li>
+        <li><h3>Mesurer l'écart</h3><p>Situer l'annoncé et le mesuré sur chacune des cinq questions, puis traduire l'écart en coût et en risque.</p></li>
+        <li><h3>Ordonner les paliers</h3><p>Construire un plan de stabilisation réaliste, du plus urgent au plus rentable.</p></li>
+        <li><h3>Restituer</h3><p>Présenter la situation et les options à ceux qui décident, pour qu'ils puissent trancher.</p></li>
+      </ol>
     </div>
   </section>
 
   <!-- OFFRE -->
   <section id="offre">
     <div class="wrap">
-      <div class="s-head">
-        <div class="eyebrow">Ce que vous achetez</div>
-        <h2>Un diagnostic. Pas du temps.</h2>
-        <p>Ce que vous achetez, c'est la clarté nécessaire pour décider — pas des jours de prestation. Le prix correspond au livrable, pas au nombre d'heures passées à le produire.</p>
-      </div>
-      <div class="offer">
-        <span class="offer-tag">Diagnostic de dette technique</span>
-        <h3>La Méthode de la Diagonale, appliquée à votre organisation</h3>
-        <p class="lead">Aussi appelé « audit » pour les grands comptes habitués à ce vocabulaire normalisé, ou « état des lieux » / « bilan de l'existant » pour une PME dont le dirigeant achète moins souvent ce type de prestation. Le fond ne change pas.</p>
-        <div class="tiers">
-          <div class="tier">
-            <div class="t-label">Périmètre ciblé</div>
-            <div class="t-price">À partir de 3 000 €</div>
-            <p>Un processus, une application, une chaîne de traitement précise. Idéal pour un premier terrain de confiance avant d'engager un diagnostic complet.</p>
-          </div>
-          <div class="tier">
-            <div class="t-label">Diagnostic d'organisation</div>
-            <div class="t-price">15 000 € <span>/ 15 jours calendaires</span></div>
-            <p>Cartographie complète, score de dette, plan de stabilisation priorisé et restitution décisionnelle pour votre CODIR ou votre direction générale.</p>
-          </div>
+      <p class="kicker">Offre</p>
+      <h2>Deux façons de commencer.</h2>
+      <div class="offers">
+        <div class="offer">
+          <p class="for">Pour vérifier la méthode sur un sujet précis</p>
+          <h3>Premier périmètre</h3>
+          <p class="price"><small>à partir de </small>3 000 €</p>
+                    <p class="delay">Environ 15 jours calendaires</p>
+          <ul>
+            <li>Un traitement, une application ou un processus</li>
+            <li>Lecture des risques et chiffrage</li>
+            <li>Plan d'action et restitution</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost">Discuter d'un premier périmètre</a>
         </div>
-        <p class="offer-note">Le délai calendaire intègre les allers-retours et la vérification empirique — pas seulement le temps de rédaction. Chaque diagnostic se termine par une restitution orale, pas seulement un document.</p>
-        <div class="offer-foot">
-          <span class="mono" style="font-size:13px; color:var(--paper-dim);">Sans engagement — premier échange de 15 minutes, sans vente</span>
-          <a href="#contact" class="btn btn-primary">Cadrer un premier échange →</a>
+        <div class="offer main">
+          <p class="for">Pour décider à l'échelle de l'organisation</p>
+          <h3>Diagnostic d'organisation</h3>
+          <p class="price"><small>à partir de </small>15 000 €</p>
+                    <p class="delay">Quelques semaines, selon l'étendue</p>
+          <ul>
+            <li>Un domaine entier ou toute la DSI</li>
+            <li>Cartographie, risques et chiffrage complets</li>
+            <li>Plan par paliers et restitution en comité de direction</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">Discuter d'un diagnostic</a>
         </div>
       </div>
+      <p class="offer-note">Les prix sont indicatifs : chaque proposition est établie au forfait selon le périmètre, sur le livrable attendu et non sur un nombre de jours. Audit, diagnostic ou état des lieux : appelez-le comme votre organisation en a l'habitude, le travail reste le même. Terrains couverts :</p>
+      <ul class="terrains">
+        <li>Dataiku et plateformes low-code</li>
+        <li>Code métier et scripts</li>
+        <li>Applications backend</li>
+        <li>Chaînes de traitements batch</li>
+        <li>Processus entre applications</li>
+      </ul>
     </div>
   </section>
 
   <!-- POUR QUI -->
-  <section id="pour-qui">
+  <section class="about" id="pour-qui" style="background:var(--ink2);">
     <div class="wrap">
-      <div class="s-head">
-        <div class="eyebrow">Pour qui</div>
-        <h2>Un persona précis, avant tout le reste.</h2>
-        <p>Le diagnostic fonctionne dans un contexte donné. Ailleurs, il devient invendable — la différence tient rarement à la technique.</p>
-      </div>
-
-      <div class="persona">
+      <p class="kicker">Pour qui</p>
+      <h2>Pour ceux qui doivent décider.</h2>
+      <div class="who">
         <div>
-          <div class="persona-badge">Le persona principal</div>
-          <h3>Le DSI qui vient d'arriver</h3>
-          <p>Fraîchement nommé ou recruté, il doit comprendre vite ce qui se passe réellement dans son organisation — et n'a pas toujours le temps ni le niveau technique pour aller chercher le fond du fond lui-même. Il n'a pas construit sa légitimité sur le succès affiché des projets en place : il a au contraire tout intérêt à faire émerger la vérité, car elle sert son narratif d'arrivée, pas celui de son prédécesseur.</p>
+          <h3>Un DSI qui prend ses fonctions</h3>
+          <p>Vous devez comprendre rapidement ce que vous héritez, sans avoir le temps de tout vérifier vous-même. Vous avez besoin d'une base factuelle pour vos premières décisions.</p>
         </div>
-        <div class="persona-visual">
-          <div class="pv-inner">
-            <span class="big">J0</span>
-            « Fais-moi l'audit complet. Donne-moi une image claire pour que je puisse décider. »
-          </div>
+        <div>
+          <h3>Une direction de PME ou d'ETI</h3>
+          <p>Votre informatique a grandi par ajouts successifs et coûte de plus en plus cher à faire évoluer. Vous voulez savoir où vous en êtes avant d'investir davantage.</p>
         </div>
-      </div>
-
-      <div class="icp-grid">
-        <div class="icp-col green">
-          <h4><span class="sq"></span>Terrain favorable</h4>
+        <div class="not">
+          <h3>Ce n'est sans doute pas le bon moment si…</h3>
           <ul>
-            <li>Interlocuteur DSI, ou profil « mindset informaticien » — pas le métier seul</li>
-            <li>Moment de transition : nouveau DSI, nouveau responsable data, consultant précédent évincé</li>
-            <li>Volume suffisant pour que la dette soit visible et chiffrable</li>
-            <li>Un sponsor qui a besoin d'une couverture externe pour poser une question inconfortable</li>
-          </ul>
-        </div>
-        <div class="icp-col red">
-          <h4><span class="sq"></span>Terrain défavorable</h4>
-          <ul>
-            <li>Client = le métier seul, sans relais DSI — le vocabulaire technique n'est qu'un vernis</li>
-            <li>Guerre inter-ESN sur le même compte — une vérité inconfortable devient un risque disproportionné</li>
-            <li>Un responsable qui a construit sa légitimité sur le succès affiché du projet</li>
-            <li>Personne ne sait dire quel a été le dernier mois qu'il a fallu rejouer, ni pourquoi</li>
+            <li>vous attendez surtout une validation de l'existant&nbsp;;</li>
+            <li>les conclusions ne pourront pas remonter jusqu'à ceux qui décident&nbsp;;</li>
+            <li>vous cherchez des jours de développement en renfort.</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CAS VECUS -->
-  <section class="cases" id="cas">
+  <!-- A PROPOS -->
+  <section id="a-propos">
+    <div class="wrap about-grid">
+      <div>
+        <p class="kicker">À propos</p>
+        <h2>25 ans à l'intérieur des DSI.</h2>
+      </div>
+      <div>
+        <p>Je travaille dans l'informatique depuis 1999, en entreprise, en ESN puis en indépendant. J'ai vu plusieurs vagues promettre que le développement deviendrait simple : la bulle internet, l'externalisation, puis le low-code et l'IA générative.</p>
+        <p><strong>Ma conviction : ces outils ne font pas disparaître les problèmes de génie logiciel. Ils les déplacent.</strong> La maintenance, les évolutions et les livraisons restent difficiles. Ce qui change, c'est l'endroit où la difficulté se cache.</p>
+
+        <div class="seen">
+          <article>
+            <p class="ctx">Secteur bancaire</p>
+            <h3>Plus de mille projets sur une plateforme low-code</h3>
+            <p>Une large part était en réalité du code Python. Les utilisateurs métier codaient, et l'équipe IT leur apportait du support technique.</p>
+          </article>
+          <article>
+            <p class="ctx">Assurance</p>
+            <h3>Un traitement annuel critique, jamais refondu</h3>
+            <p>Il coûtait cher à relancer chaque année. La refonte paraissait trop lourde, le coût de l'entretien n'était jamais mis en regard.</p>
+          </article>
+          <article>
+            <p class="ctx">Grand groupe international</p>
+            <h3>Un projet « terminé » qui n'était pas reproductible</h3>
+            <p>J'ai mis en place des exécutions à blanc avant chaque clôture mensuelle pour sécuriser la production, et documenté la correction de fond.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:var(--ink2); padding-top:96px;">
     <div class="wrap">
-      <div class="s-head">
-        <div class="eyebrow">Preuves de méthode</div>
-        <h2>Trois écosystèmes, un même mécanisme.</h2>
-        <p>Situations anonymisées — le détail des organisations reste confidentiel, le mécanisme ne l'est pas.</p>
-      </div>
-      <div class="case-grid">
-        <div class="case">
-          <span class="c-tag mono">Secteur bancaire — low-code</span>
-          <h3>1000+ flux, 80% de code caché</h3>
-          <p>Après un échec massif resté gravé dans l'organisation, plus personne n'osait recadrer l'usage de l'outil low-code. Résultat : un runtime Python géant, jusqu'aux utilisateurs métier qui codent — et l'IT qui leur fait support sur PySpark.</p>
-          <div class="c-result">→ Le pire des deux mondes, nommé et documenté.</div>
-        </div>
-        <div class="case">
-          <span class="c-tag mono">Assurance — ordonnancement</span>
-          <h3>Un traitement batch annuel, jamais sorti</h3>
-          <p>Un drain financier récurrent pour maintenir en vie un traitement annuel critique, sur une base mal normée par une IHM d'un autre temps. La refonte, chiffrée trop lourde, n'a jamais été lancée — seul un contournement technique a tenu la chaîne en vie.</p>
-          <div class="c-result">→ Diagnostic posé, arbitrage assumé par le client.</div>
-        </div>
-        <div class="case">
-          <span class="c-tag mono">Grand groupe international — processus</span>
-          <h3>Un projet « fini » qui était en réalité un POC</h3>
-          <p>Non-reproductibilité des résultats mois après mois. Mise en place d'exécutions « à blanc » avant chaque clôture — une forme d'intégration continue manuelle, là où rien n'existait. La solution root-cause a été jugée « trop structurante » et refusée.</p>
-          <div class="c-result">→ Le risque documenté, la décision de ne pas le traiter aussi.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUI JE SUIS -->
-  <section class="about">
-    <div class="wrap about-layout">
-      <div>
-        <div class="eyebrow">Qui je suis</div>
-        <h2 style="font-size:clamp(24px,3vw,32px);">25 ans à l'intérieur des DSI.</h2>
-      </div>
-      <div>
-        <p><strong>Consultant informatique depuis 2001</strong> — salarié IT de 1999 à 2001, puis ESN, puis <strong>freelance en EURL depuis 2022.</strong> J'ai traversé trois cycles complets du métier : le développeur roi de la bulle internet, la défiance et l'offshore qui ont suivi son éclatement, et aujourd'hui le no-code et l'IA générative qui rejouent la même promesse.</p>
-        <p>Ma conviction, forgée sur ces trois cycles : <strong>les outils no-code, low-code et l'IA ne suppriment pas les problématiques de génie logiciel</strong> — coût de maintenance, difficulté d'évolution, livraisons périlleuses. Elles les déplacent, et souvent les aggravent, quel que soit l'écosystème.</p>
-        <p>Aujourd'hui, je ne vends plus mon temps de développeur. Je vends la clarté d'un diagnostic — la capacité à dire où ça va merder avant que ça merde, et à donner à une direction les moyens de décider en connaissance de cause.</p>
+      <p class="kicker">Questions fréquentes</p>
+      <h2>Avant de se parler.</h2>
+      <div class="faq">
+        <details>
+          <summary>Venez-vous remplacer nos équipes ou notre prestataire&nbsp;?</summary>
+          <p>Non. Le diagnostic apporte un regard extérieur et neutre. Il ne cherche pas de coupable et ne remet pas en cause les personnes : il décrit une situation et des options.</p>
+        </details>
+        <details>
+          <summary>Faut-il tout refaire si la dette est importante&nbsp;?</summary>
+          <p>Rarement tout. Le plan avance par paliers. Quand reconstruire une partie coûte moins cher que la maintenir, le diagnostic le montre chiffres à l'appui, pour que la décision soit défendable.</p>
+        </details>
+        <details>
+          <summary>Comment se passe le démarrage&nbsp;?</summary>
+          <p>Par un échange de 15 minutes pour comprendre votre contexte. Si un diagnostic a du sens, on définit ensemble le périmètre, les interlocuteurs et les accès nécessaires avant de commencer.</p>
+        </details>
+        <details>
+          <summary>Nos informations restent-elles confidentielles&nbsp;?</summary>
+          <p>Oui. Un accord de confidentialité peut être signé avant tout échange détaillé, et les situations évoquées sur ce site sont anonymisées.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -554,12 +491,11 @@
   <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="wrap">
-      <div class="eyebrow" style="justify-content:center;">Prochaine étape</div>
-      <h2>Un premier échange de 15 minutes, sans rien à vendre.</h2>
-      <p>L'objectif : valider si le terrain est favorable, et si un diagnostic a du sens avant d'aller plus loin.</p>
+      <h2>Commençons par 15 minutes.</h2>
+      <p class="lead">Pour voir si un diagnostic a du sens dans votre situation. Si ce n'est pas le cas, je vous le dirai.</p>
       <div class="contact-links">
-        <a href="mailto:fernando.goncalves@hotmail.fr?subject=Diagnostic%20de%20dette%20technique" class="btn btn-primary">fernando.goncalves@hotmail.fr →</a>
-        <a href="https://www.linkedin.com/in/nandogoncalves/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:fernando.goncalves@hotmail.fr?subject=Diagnostic%20de%20dette%20technique" class="btn btn-primary">fernando.goncalves@hotmail.fr</a>
+        <a href="https://www.linkedin.com/in/nandogoncalves/" class="btn btn-ghost" target="_blank" rel="noopener">Me contacter sur LinkedIn</a>
       </div>
     </div>
   </section>
@@ -567,11 +503,16 @@
 </main>
 
 <footer>
-  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-    <span class="mono">© <span id="year"></span> Fernando Gonçalves — Consultant en dette technique. EURL.</span>
-    <div class="foot-links">
-      <a href="#top">Haut de page</a>
-      <a href="mailto:votre.email@exemple.fr">Contact</a>
+  <div class="wrap">
+    <div class="foot">
+      <span>© <span id="year"></span> Fernando Gonçalves, EURL data intellisenses</span>
+      <details>
+        <summary>Mentions légales</summary>
+        <p>Éditeur : EURL data intellisenses, SIREN 908 737 026, siège social à Bailleau-Armenonville (28).<br>
+        Directeur de la publication : Fernando Gonçalves.<br>
+        Hébergeur : GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.<br>
+        Contact : fernando.goncalves@hotmail.fr</p>
+      </details>
     </div>
   </div>
 </footer>
@@ -579,6 +520,5 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-
 </body>
 </html>
