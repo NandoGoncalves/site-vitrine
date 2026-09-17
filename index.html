@@ -53,17 +53,18 @@
   .btn{display:inline-flex; align-items:center; font-family:var(--head); font-weight:500; font-size:15.5px; padding:13px 22px; border-radius:3px; text-decoration:none; border:1px solid transparent; transition:background .15s ease, border-color .15s ease;}
   .btn-primary{background:var(--paper); color:var(--ink);}
   .btn-primary:hover{background:#fff;}
+  .btn-accent{background:var(--ember); color:#fff;}
+  .btn-accent:hover{background:#f04a67;}
   .btn-ghost{border-color:rgba(244,238,231,0.4);}
   .btn-ghost:hover{border-color:var(--paper);}
   .btn-small{padding:8px 16px; font-size:14px;}
 
   /* HERO */
-  .hero{position:relative; padding:170px 0 110px; background:linear-gradient(118deg, var(--indigo) 0%, var(--violet) 38%, var(--magenta) 72%, var(--crimson) 100%); overflow:hidden;}
+  .hero{position:relative; padding:176px 0 104px; background:linear-gradient(118deg, var(--indigo) 0%, var(--violet) 38%, var(--magenta) 72%, var(--crimson) 100%); overflow:hidden;}
   .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 55%, var(--ink) 100%); pointer-events:none;}
-  .hero-grid{position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:64px; align-items:center;}
-  @media (max-width:940px){ .hero-grid{grid-template-columns:1fr; gap:56px;} }
-  .hero h1{font-size:clamp(38px,5.4vw,66px); max-width:17ch;}
-  .hero .lead{color:#e6d8e2; font-size:19px; max-width:52ch; margin-top:26px;}
+  .hero-grid{position:relative; z-index:1;}
+  .hero h1{font-size:clamp(36px,4.8vw,60px); max-width:22ch;}
+  .hero .lead{color:#e6d8e2; font-size:19px; max-width:58ch; margin-top:26px;}
   .hero-cta{display:flex; gap:14px; flex-wrap:wrap; margin-top:38px;}
 
   /* LA DIAGONALE — élément signature */
@@ -82,6 +83,14 @@
     @keyframes light{from{background:rgba(244,238,231,0.05);} to{background:var(--paper);}}
   }
   @media (max-width:420px){ .mx{grid-template-columns:92px repeat(5,1fr);} .mx .rl{font-size:11.5px;} .mx-dir{margin-left:96px; font-size:11.5px;} .matrix{padding:20px 16px 18px;} }
+
+  /* RAPPELS D'APPEL A L'ACTION */
+  .cta-row{margin-top:60px;}
+  .cta-row.center{text-align:center;}
+  .btn-link{display:inline-flex; align-items:center; gap:8px; font-family:var(--head); font-size:16.5px; color:var(--ember); text-decoration:none; border-bottom:1px solid rgba(224,48,79,0.5); padding-bottom:3px;}
+  .btn-link:hover{color:var(--paper); border-bottom-color:var(--paper);}
+  .cta-band{display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; border:1px solid var(--line); padding:24px 28px; background:rgba(244,238,231,0.03);}
+  .cta-band p{font-family:var(--head); font-size:19px; max-width:46ch;}
 
   /* SYMPTOMES */
   .symptoms{display:grid; grid-template-columns:repeat(2,1fr); gap:0 56px; margin-top:52px; list-style:none;}
@@ -121,7 +130,9 @@
 
   /* METHODE */
   .method{background:var(--ink2);}
-  .steps{list-style:none; margin-top:56px; display:grid; grid-template-columns:repeat(5,1fr); gap:24px; counter-reset:s;}
+  .method-top{display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center;}
+  @media (max-width:940px){ .method-top{grid-template-columns:1fr; gap:44px;} }
+  .steps{list-style:none; margin-top:72px; display:grid; grid-template-columns:repeat(5,1fr); gap:24px; counter-reset:s;}
   @media (max-width:980px){ .steps{grid-template-columns:1fr 1fr;} }
   @media (max-width:560px){ .steps{grid-template-columns:1fr;} }
   .steps li{counter-increment:s; border-top:2px solid var(--ember); padding-top:18px;}
@@ -138,7 +149,7 @@
   .offer h3{font-size:25px;}
   .price{font-family:var(--head); font-size:34px; font-weight:600; margin:22px 0 4px;}
   .price small{font-size:15px; font-weight:400; color:var(--dim);}
-  .offer .delay{color:var(--dim); font-size:15px; margin-bottom:22px;}
+  .offer .delay{color:var(--dim); font-size:15px; margin:18px 0 22px;}
   .offer ul{list-style:none; margin-bottom:30px;}
   .offer li{padding:10px 0; border-top:1px solid var(--line); font-size:15.5px; color:var(--dim);}
   .offer .btn{margin-top:auto; align-self:flex-start;}
@@ -220,7 +231,7 @@
     <div class="wrap hero-grid">
       <div>
         <p class="kicker" style="color:#ffc2cc;">Consultant en dette technique</p>
-        <h1>Votre existant tient. Savez-vous à quel prix&nbsp;?</h1>
+        <h1>Votre dette technique diagnostiquée, pilotée, corrigée</h1>
         <p class="lead">Je pose un diagnostic indépendant de votre système d'information : ce qui est annoncé, ce qui tourne réellement, et ce que l'écart vous coûte. Vous repartez avec une image claire et un plan par paliers pour décider.</p>
         <div class="hero-cta">
           <a href="#contact" class="btn btn-primary">Échanger 15 minutes</a>
@@ -228,18 +239,6 @@
         </div>
       </div>
 
-      <figure class="matrix" aria-label="Exemple : le low-code, l'automatisation et la capitalisation sont surestimés, la maintenance est sous-estimée, seules les règles métier sont évaluées justement">
-        <p class="mx-title">La diagonale, appliquée aux cinq questions (exemple)</p>
-        <div class="mx" aria-hidden="true">
-          <span class="rl">Low-code</span><span class="c d"></span><span class="c"></span><span class="c"></span><span class="c hit" style="--i:0"></span><span class="c"></span>
-          <span class="rl">Automatisation</span><span class="c"></span><span class="c d"></span><span class="c"></span><span class="c hit" style="--i:1"></span><span class="c"></span>
-          <span class="rl">Règles métier</span><span class="c"></span><span class="c"></span><span class="c d hit" style="--i:2"></span><span class="c"></span><span class="c"></span>
-          <span class="rl">Capitalisation</span><span class="c"></span><span class="c"></span><span class="c"></span><span class="c d"></span><span class="c hit" style="--i:3"></span>
-          <span class="rl">Maintenance</span><span class="c"></span><span class="c hit" style="--i:4"></span><span class="c"></span><span class="c"></span><span class="c d"></span>
-        </div>
-        <div class="mx-dir" aria-hidden="true"><span>← sous-estimé</span><span>surestimé →</span></div>
-        <figcaption class="mx-cap"><strong>Sur la diagonale</strong>, le sujet est évalué justement. À droite, il est surestimé ; à gauche, sous-estimé. <strong>Plus la case claire s'éloigne de la diagonale, plus la dette est lourde.</strong></figcaption>
-      </figure>
     </div>
   </section>
 
@@ -256,8 +255,9 @@
         <li><strong>Vous venez d'arriver et devez décider vite.</strong>On vous assure que tout fonctionne, mais personne ne peut le démontrer.</li>
         <li><strong>Le budget part dans l'entretien.</strong>Maintenir l'existant coûte chaque année un peu plus, sans que ce coût apparaisse nulle part.</li>
       </ul>
-      <p class="aside-note">Ce n'est pas une question de compétence de vos équipes. C'est une dette qui n'a jamais été nommée, donc jamais chiffrée.</p>
+      <p class="aside-note">Votre dette n'a jamais été nommée, donc jamais chiffrée.</p>
     </div>
+    <div class="wrap cta-row"><div class="cta-band"><p>Si deux de ces situations vous parlent, un premier échange suffit pour savoir quoi en faire.</p><a href="#contact" class="btn btn-accent">Échanger 15 minutes</a></div></div>
   </section>
 
   <!-- TABOU -->
@@ -273,6 +273,7 @@
         <blockquote>Un regard extérieur permet de poser les faits sans chercher de coupable, avec des chiffres et un plan que la direction peut entendre.</blockquote>
       </div>
     </div>
+    <div class="wrap cta-row"><a href="#contact" class="btn-link">En parler sans langue de bois, 15 minutes →</a></div>
   </section>
 
   <!-- CINQ QUESTIONS -->
@@ -309,10 +310,44 @@
         </div>
       </div>
     </div>
+    <div class="wrap cta-row"><a href="#contact" class="btn btn-ghost">Poser ces cinq questions chez vous</a></div>
+  </section>
+
+  <!-- METHODE -->
+  <section class="method" id="methode" style="background:var(--ink2);">
+    <div class="wrap">
+      <div class="method-top">
+        <div>
+          <p class="kicker">La méthode de la Diagonale</p>
+          <h2>Ramener l'annoncé et le réel sur la même ligne.</h2>
+          <p class="lead">Le nom vient de la matrice de confusion : sur la diagonale, la prévision correspond à la réalité. La méthode consiste à mesurer tout ce qui s'en écarte, puis à le réduire progressivement.</p>
+        </div>
+        <figure class="matrix" aria-label="Exemple : le low-code, l'automatisation et la capitalisation sont surestimés, la maintenance est sous-estimée, seules les règles métier sont évaluées justement">
+          <p class="mx-title">La diagonale, appliquée aux cinq questions</p>
+        <div class="mx" aria-hidden="true">
+          <span class="rl">Low-code</span><span class="c d"></span><span class="c"></span><span class="c"></span><span class="c hit" style="--i:0"></span><span class="c"></span>
+          <span class="rl">Automatisation</span><span class="c"></span><span class="c d"></span><span class="c"></span><span class="c hit" style="--i:1"></span><span class="c"></span>
+          <span class="rl">Règles métier</span><span class="c"></span><span class="c"></span><span class="c d hit" style="--i:2"></span><span class="c"></span><span class="c"></span>
+          <span class="rl">Capitalisation</span><span class="c"></span><span class="c"></span><span class="c"></span><span class="c d"></span><span class="c hit" style="--i:3"></span>
+          <span class="rl">Maintenance</span><span class="c"></span><span class="c hit" style="--i:4"></span><span class="c"></span><span class="c"></span><span class="c d"></span>
+        </div>
+        <div class="mx-dir" aria-hidden="true"><span>← sous-estimé</span><span>surestimé →</span></div>
+        <figcaption class="mx-cap"><strong>Sur la diagonale</strong>, le sujet est évalué justement. À droite, il est surestimé ; à gauche, sous-estimé. <strong>Plus la case claire s'éloigne de la diagonale, plus la dette est lourde.</strong></figcaption>
+      </figure>
+      </div>
+      <ol class="steps">
+        <li><h3>Recenser l'annoncé</h3><p>Ce que l'organisation présente comme son existant, à travers la documentation et des entretiens ciblés.</p></li>
+        <li><h3>Vérifier le réel</h3><p>Tester la reproductibilité, tracer les dépendances, regarder ce qui tourne réellement en production.</p></li>
+        <li><h3>Mesurer l'écart</h3><p>Situer l'annoncé et le mesuré sur chacune des cinq questions, puis traduire l'écart en coût et en risque.</p></li>
+        <li><h3>Ordonner les paliers</h3><p>Construire un plan de stabilisation réaliste, du plus urgent au plus rentable.</p></li>
+        <li><h3>Restituer</h3><p>Présenter la situation et les options à ceux qui décident, pour qu'ils puissent trancher.</p></li>
+      </ol>
+    </div>
+    <div class="wrap cta-row"><a href="#contact" class="btn-link">Appliquer la méthode à votre existant →</a></div>
   </section>
 
   <!-- LIVRABLE -->
-  <section id="livrable" style="background:var(--ink2);">
+  <section id="livrable">
     <div class="wrap">
       <p class="kicker">Ce que vous obtenez</p>
       <h2>Une image claire, pas un rapport de plus.</h2>
@@ -344,22 +379,7 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- METHODE -->
-  <section class="method" id="methode" style="background:var(--ink);">
-    <div class="wrap">
-      <p class="kicker">La méthode de la Diagonale</p>
-      <h2>Ramener l'annoncé et le réel sur la même ligne.</h2>
-      <p class="lead">Le nom vient de la matrice de confusion : sur la diagonale, la prévision correspond à la réalité. La méthode consiste à mesurer tout ce qui s'en écarte, puis à le réduire progressivement.</p>
-      <ol class="steps">
-        <li><h3>Recenser l'annoncé</h3><p>Ce que l'organisation présente comme son existant, à travers la documentation et des entretiens ciblés.</p></li>
-        <li><h3>Vérifier le réel</h3><p>Tester la reproductibilité, tracer les dépendances, regarder ce qui tourne réellement en production.</p></li>
-        <li><h3>Mesurer l'écart</h3><p>Situer l'annoncé et le mesuré sur chacune des cinq questions, puis traduire l'écart en coût et en risque.</p></li>
-        <li><h3>Ordonner les paliers</h3><p>Construire un plan de stabilisation réaliste, du plus urgent au plus rentable.</p></li>
-        <li><h3>Restituer</h3><p>Présenter la situation et les options à ceux qui décident, pour qu'ils puissent trancher.</p></li>
-      </ol>
-    </div>
+    <div class="wrap cta-row"><div class="cta-band"><p>Vous voulez cette image claire de votre existant&nbsp;?</p><a href="#contact" class="btn btn-primary">Échanger 15 minutes</a></div></div>
   </section>
 
   <!-- OFFRE -->
@@ -371,7 +391,6 @@
         <div class="offer">
           <p class="for">Pour vérifier la méthode sur un sujet précis</p>
           <h3>Premier périmètre</h3>
-          <p class="price"><small>à partir de </small>3 000 €</p>
                     <p class="delay">Environ 15 jours calendaires</p>
           <ul>
             <li>Un traitement, une application ou un processus</li>
@@ -383,7 +402,6 @@
         <div class="offer main">
           <p class="for">Pour décider à l'échelle de l'organisation</p>
           <h3>Diagnostic d'organisation</h3>
-          <p class="price"><small>à partir de </small>15 000 €</p>
                     <p class="delay">Quelques semaines, selon l'étendue</p>
           <ul>
             <li>Un domaine entier ou toute la DSI</li>
@@ -393,7 +411,7 @@
           <a href="#contact" class="btn btn-primary">Discuter d'un diagnostic</a>
         </div>
       </div>
-      <p class="offer-note">Les prix sont indicatifs : chaque proposition est établie au forfait selon le périmètre, sur le livrable attendu et non sur un nombre de jours. Audit, diagnostic ou état des lieux : appelez-le comme votre organisation en a l'habitude, le travail reste le même. Terrains couverts :</p>
+      <p class="offer-note">Chaque proposition est établie au forfait, sur le livrable attendu et non sur un nombre de jours. Audit, diagnostic ou état des lieux : appelez-le comme votre organisation en a l'habitude, le travail reste le même. Terrains couverts :</p>
       <ul class="terrains">
         <li>Dataiku et plateformes low-code</li>
         <li>Code métier et scripts</li>
@@ -428,6 +446,7 @@
         </div>
       </div>
     </div>
+    <div class="wrap cta-row"><a href="#contact" class="btn btn-ghost">Vérifier si c'est le bon moment</a></div>
   </section>
 
   <!-- A PROPOS -->
@@ -460,6 +479,7 @@
         </div>
       </div>
     </div>
+    <div class="wrap cta-row"><a href="#contact" class="btn-link">Me parler de votre existant →</a></div>
   </section>
 
   <!-- FAQ -->
@@ -486,6 +506,7 @@
         </details>
       </div>
     </div>
+    <div class="wrap cta-row center"><a href="#contact" class="btn btn-primary">Poser votre question en 15 minutes</a></div>
   </section>
 
   <!-- CONTACT -->
